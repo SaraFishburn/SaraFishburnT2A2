@@ -1,0 +1,2 @@
+class FilamentsAndResinsController < ApplicationController
+end

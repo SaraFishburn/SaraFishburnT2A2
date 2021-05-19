@@ -1,0 +1,2 @@
+module FilamentsAndResinsHelper
+end
