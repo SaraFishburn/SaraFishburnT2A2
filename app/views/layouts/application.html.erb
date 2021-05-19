@@ -26,8 +26,8 @@
   <body>
     <nav>
       <% if user_signed_in? %>
-        <%= render 'address_search' %>
-        <%= render 'profile_dropdown' %>
+        <%= render 'shared/address_search' %>
+        <%= render 'shared/profile_dropdown' %>
       <% else %>
         <%= link_to "Login", new_user_session_path %>
         |
