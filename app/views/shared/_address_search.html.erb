@@ -3,10 +3,10 @@
   function initAutocomplete() {
 
     // Create the search box and link it to the UI element.
-    const inputs = document.getElementsByClassName("pac-input");
-    console.log(inputs)
+    const inputs = document.getElementsByClassName("google-autofill");
+
     for (let i = 0; i < inputs.length; i++) {
-      const searchBox = new google.maps.places.SearchBox(inputs[i]);
+      const searchBox = new google.maps.places.Autocomplete(inputs[i]);
 
       // Listen for the event fired when the user selects a prediction and retrieve
       // more details for that place.
@@ -18,14 +18,11 @@
         }
       });
     }
-
-    
-
   }
 </script>
 
 <div class="input-group mb-3">
-  <input type="text" class="form-control pac-input" placeholder="Search by postcode or address" aria-label="Address search" aria-describedby="basic-addon2">
+  <input type="text" class="form-control google-autofill" placeholder="Search by postcode or address" aria-label="Address search" aria-describedby="basic-addon2">
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button"><span class="material-icons">search</span></button>
   </div>
