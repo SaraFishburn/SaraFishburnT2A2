@@ -1,23 +1,40 @@
-<% if current_user.profile_pic.attached? %>
-<p>
-  <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
-</p>
-<% end %>
-
-<%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
-  <span class="material-icons">edit</span>
-<% end %>
-
-<h2>Your 
-  <% if current_user.has_role? :owner %>
-    Owner
-  <% else %>
-    Maker
-  <% end %>
-Account</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
+
+  <% if current_user.profile_pic.attached? %>
+    <div>
+      <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
+    </div>
+  <% else %>
+    <div style="border: 1px solid black; width: 200px; height: 200px; border-radius: 50%;">
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.file_field :profile_pic %>
+    <span class="material-icons">edit</span>
+  </div>
+
+
+  <% if current_user.nickname %>
+    <h1>
+      <%= current_user.nickname %>
+    </h1>
+  <% else %>
+    <h1>
+        <%= current_user.first_name %>
+    </h1>
+  <% end %>
+
+
+  <h2>Your 
+    <% if current_user.has_role? :owner %>
+      Owner
+    <% else %>
+      Maker
+    <% end %>
+  Account</h2>
+
 
   <div class="field">
     <%= f.label :first_name %><br />
@@ -57,14 +74,15 @@ Account</h2>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <% if current_user.has_role? :owner %>
+    <%= render partial: 'shared/address_field', locals: { form: f, default_address: current_user.address } %>
+  <% end %>
+
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
-  <% if current_user.has_role? :owner %>
-    <%= render partial: 'address_field', locales: { form: f, default_address: current_user.address } %>
-  <% end %>
 
   <div class="actions">
     <%= f.submit "Save Changes" %>
