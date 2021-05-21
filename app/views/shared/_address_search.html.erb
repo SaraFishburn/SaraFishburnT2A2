@@ -1,8 +1,12 @@
 <%= javascript_pack_tag 'autofill' %>
 
-<div class="input-group mb-3">
-  <input type="text" class="form-control google-autofill" placeholder="Search by postcode or address" aria-label="Address search" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button"><span class="material-icons">search</span></button>
+<%= form_with url: '/searches', method: :get do |f|%>
+  <div class="input-group mb-3">
+    <%= f.text_field :address, class: "form-control google-autofill", placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
+    <div class="input-group-append">
+      <%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
+        <span class="material-icons">search</span>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

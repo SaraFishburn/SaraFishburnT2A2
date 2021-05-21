@@ -1,3 +1,13 @@
+<% if current_user.profile_pic.attached? %>
+<p>
+  <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
+</p>
+<% end %>
+
+<%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
+  <span class="material-icons">edit</span>
+<% end %>
+
 <h2>Your 
   <% if current_user.has_role? :owner %>
     Owner
@@ -53,18 +63,14 @@ Account</h2>
   </div>
 
   <% if current_user.has_role? :owner %>
-    <%= render 'address_field' form: f, default_address: current_user.address %>
+    <%= render partial: 'address_field', locales: { form: f, default_address: current_user.address } %>
   <% end %>
-
-Account</h2>
 
   <div class="actions">
     <%= f.submit "Save Changes" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p><%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
