@@ -28,6 +28,13 @@
 
   <body>
     <nav>
+      <div class="logo">
+        <%= link_to searches_path do %>
+          <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621581516/print3d_logo_n7yjae.svg", crop: :scale, height: 70, cloud_name: 'sazza' %>
+        <% end %>
+        <h1>Print3D.</h1>
+      </div>
+
       <% if user_signed_in? %>
         <%= render 'shared/address_search' %>
         <%= render 'shared/profile_dropdown' %>

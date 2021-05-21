@@ -49,13 +49,26 @@ body {
     width: 100%;
     box-shadow: var(--dp4);
     position: relative;
-    height: 65px;
+    height: 80px;
     display: flex;
     align-items: center;
     background-color: white;
 
     --img-height: 30px;
     --search-bar-height: 35px;
+
+    .logo {
+      margin-left: 5px;
+      flex: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      h1 {
+        margin: 0;
+        margin-left: 10px;
+      }
+    }
 
     .mb-3 {
       margin: 0 !important;
@@ -100,26 +113,26 @@ body {
     }
 
     .user-menu {
-      // margin-left: 80%;
+      margin-right: 15px;
+
       .profile-settings {
         display: flex;
         align-items: center;
+        margin-left: 10px;
 
         .user-image {
           position: relative;
+          cursor: pointer;
+          height: var(--img-height);
+          width: var(--img-height);
+          border-radius: 50%;
 
-          img {
-            cursor: pointer;
-            height: var(--img-height);
-            width: var(--img-height);
-            border-radius: 50%;
+          .profile-pic {
+            @extend .user-image;
+            overflow: hidden;
           }
           
           .placeholder-profile-pic {
-            cursor: pointer;
-            height: var(--img-height);
-            width: var(--img-height);
-            border-radius: 50%;
             border: 1px solid var(--dark-2);
             display: flex;
             justify-content: center;

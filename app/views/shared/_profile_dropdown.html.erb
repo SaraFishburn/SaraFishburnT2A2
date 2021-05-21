@@ -6,7 +6,9 @@
     <%# Image with notification bubble %>
     <div class="user-image">
       <% if current_user.profile_pic.attached? %>
-        <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 40, cloud_name: 'sazza' %>
+        <div class="profile-pic">
+          <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 30, cloud_name: 'sazza' %>
+        </div>
       <% else %>
         <div class="placeholder-profile-pic"><span class="material-icons"> tag_faces </span></div>
       <% end %>

@@ -2,7 +2,7 @@
   <%= render "users/shared/error_messages", resource: resource %>
 
   <% if current_user.profile_pic.attached? %>
-    <div>
+    <div style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden">
       <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
     </div>
   <% else %>
