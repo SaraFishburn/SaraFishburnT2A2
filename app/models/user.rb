@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :printers
   has_many :filaments_and_resins
 
+  has_one_attached :profile_pic
+
 end

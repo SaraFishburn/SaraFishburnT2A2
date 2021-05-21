@@ -1,25 +1,4 @@
-
-<script>
-  function initAutocomplete() {
-
-    // Create the search box and link it to the UI element.
-    const inputs = document.getElementsByClassName("google-autofill");
-
-    for (let i = 0; i < inputs.length; i++) {
-      const searchBox = new google.maps.places.Autocomplete(inputs[i]);
-
-      // Listen for the event fired when the user selects a prediction and retrieve
-      // more details for that place.
-      searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-          return;
-        }
-      });
-    }
-  }
-</script>
+<%= javascript_pack_tag 'autofill' %>
 
 <div class="input-group mb-3">
   <input type="text" class="form-control google-autofill" placeholder="Search by postcode or address" aria-label="Address search" aria-describedby="basic-addon2">

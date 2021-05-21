@@ -1,0 +1,17 @@
+<div>
+  <% if @owner.profile_pic.attached? %>
+    <div>
+      <%= cl_image_tag @owner.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
+    </div>
+  <% else %>
+    <div class="placeholder_profile_image">
+    </div>
+  <% end %>
+
+  <h1><%= @public_name %></h1>
+
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+    Chat with Sazza <span class="material-icons">sms</span>
+  <% end %>
+
+</div>

@@ -1,0 +1,6 @@
+<%= javascript_pack_tag 'autofill' %>
+
+  <div class="field">
+    <%= @form.label :nickname %><br />
+    <%= @form.text_field :nickname, autofocus: true, autocomplete: "nickname", value: @default_address %>
+  </div>
