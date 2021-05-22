@@ -26,7 +26,6 @@
     </h1>
   <% end %>
 
-
   <h2>Your 
     <% if current_user.has_role? :owner %>
       Owner
@@ -76,13 +75,14 @@
 
   <% if current_user.has_role? :owner %>
     <%= render partial: 'shared/address_field', locals: { form: f, default_address: current_user.address } %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
   <% end %>
 
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-
 
   <div class="actions">
     <%= f.submit "Save Changes" %>

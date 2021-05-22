@@ -1,0 +1,24 @@
+<script>
+  function addressLatLong() {
+    const url = new URL("https://maps.googleapis.com/maps/api/geocode/json")
+    const address = document.getElementById("user_address").value
+
+    params = {
+      address: address,
+      key: "<%= ENV["GOOGLE_PLACES_API_KEY"] %>"
+    }
+    url.search = new URLSearchParams(params).toString()
+    return fetch(url)
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("user_address").addEventListener('change', function() {
+      addressLatLong().then((res) => res.json()).then(function(json) {
+        document.getElementById('user_latitude').value = json.results[0].geometry.location.lat
+        document.getElementById('user_longitude').value = json.results[0].geometry.location.lng
+      })
+    })
+  })
+</script>
+
+
