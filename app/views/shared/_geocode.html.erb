@@ -29,8 +29,13 @@
       setTimeout(() => {
         addressLatLong().then((res) => res.json()).then(function(json) {
           if(!json.results[0]) return
+
+          const suburb = (json.results[0].address_components.find(element => element.types.includes('locality'))).long_name
+          const postcode = (json.results[0].address_components.find(element => element.types.includes('postal_code'))).long_name
+
           document.getElementById('user_latitude').value = json.results[0].geometry.location.lat
           document.getElementById('user_longitude').value = json.results[0].geometry.location.lng
+          document.getElementById('user_suburb_and_postcode').value = `${suburb}, ${postcode}`
         })
       }, 1);
     })

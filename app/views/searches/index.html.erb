@@ -13,26 +13,3 @@ Owners
     </div>
   <% end %>
 </div>
-
-
-<% full_stars = 3 %>
-<% fraction_star = 0.4 %>
-
-<span class="rating-stars">
-    <% full_stars.times do |i| %>
-      <span class="material-icons full-star">star</span>
-    <% end %>
-
-    <% unless fraction_star.zero? %>
-      <span class="fraction-star">
-        <div class="material-icons base-star">star</div>
-        <div class="top-star-container" style="width: calc(var(--star-size) * <%= fraction_star %>);">
-          <div class="material-icons top-star">star</div>
-        </div>
-      </span>
-    <% end %>
-
-    <% (5 - (full_stars + fraction_star.ceil)).times do |i| %>
-      <span class="material-icons grey-star">star</span>
-    <% end %>
-  </span>

@@ -14,11 +14,11 @@
   </span>
 
   <span class="rating-stars">
-    <% full_stars.times do |i| %>
+    <% (rating % 1).times do |i| %>
       <span class="material-icons full-star">star</span>
     <% end %>
 
-    <% unless fraction_star.zero? %>
+    <% unless rating.to_i.zero? %>
       <span class="fraction-star">
         <div class="material-icons base-star">star</div>
         <div class="top-star-container" style="width: calc(var(--star-size) * <%= fraction_star %>);">
@@ -27,9 +27,12 @@
       </span>
     <% end %>
 
-    <% (5 - (full_stars + fraction_star.ceil)).times do |i| %>
+    <% (5 - rating.ceil).times do |i| %>
       <span class="material-icons grey-star">star</span>
     <% end %>
+  </span>
+  <span>
+    <%= num_reviews %>
   </span>
 
 </div>

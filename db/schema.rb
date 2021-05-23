@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_05_21_054218) do
     t.decimal "latitude"
     t.decimal "longitude"
     t.string "address"
+    t.string "suburb_and_postcode"
+    t.integer "rating"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
