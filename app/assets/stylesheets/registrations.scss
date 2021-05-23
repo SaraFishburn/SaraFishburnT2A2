@@ -1,0 +1,53 @@
+.registrations-edit {
+  form {
+    display: flex;
+    flex-direction: row;
+
+    .pic-name-printers {
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .profile-pic {
+        width: 200px; 
+        height: 200px; 
+        border-radius: 50%; 
+        overflow: hidden
+      }
+
+      .placeholder-profile-pic {
+        border: 1px solid black; 
+        width: 200px; 
+        height: 200px; 
+        border-radius: 50%;
+      }
+
+      .printers {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 20px;
+        justify-content: center;
+        background-color: var(--light-2);
+        border-radius: 15px;
+        box-shadow: var(--dp4);
+        width: 250px;
+        height: 300px;
+
+        p {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+
+        button {
+          width: 200px;
+          white-space: normal;
+          border-radius: 15px;
+        }
+      }
+
+    }
+  }
+
+}

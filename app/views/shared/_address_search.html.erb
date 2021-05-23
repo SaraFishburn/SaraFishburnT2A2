@@ -1,8 +1,12 @@
 <%= javascript_pack_tag 'autofill' %>
+<%= render 'shared/geocode' %>
 
 <%= form_with url: '/searches', method: :get do |f|%>
   <div class="input-group mb-3">
-    <%= f.text_field :address, class: "form-control google-autofill", placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
+    <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
+    <%= f.hidden_field :longitude %>
+    <%= f.hidden_field :latitude %>
+
     <div class="input-group-append">
       <%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
         <span class="material-icons">search</span>

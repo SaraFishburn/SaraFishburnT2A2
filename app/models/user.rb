@@ -12,4 +12,11 @@ class User < ApplicationRecord
 
   has_one_attached :profile_pic
 
+  scope :within_range, lambda { |lat, long, dist|
+                         dist *= 0.009009009
+                         where.not(address: nil)
+                              .where(latitude: (lat - dist)..(lat + dist))
+                              .where(longitude: (long - dist)..(long + dist))
+                       }
+  
 end

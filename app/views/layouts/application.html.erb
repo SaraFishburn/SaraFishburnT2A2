@@ -37,7 +37,7 @@
       </div>
 
       <% if user_signed_in? %>
-        <%= render 'shared/address_search' %>
+        <%= render partial: 'shared/address_search', locals: { default_address: '' } %>
         <%= render 'shared/profile_dropdown' %>
       <% else %>
         <%= link_to "Login", new_user_session_path %>

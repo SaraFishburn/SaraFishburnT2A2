@@ -3,4 +3,13 @@
   <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621586175/print3d_logo_white_erl3fm.svg", crop: :scale, width: 200, cloud_name: 'sazza' %>
 </div>
 
-<%= render 'shared/address_search'%>
+<%= render partial: 'shared/address_search', locals: { default_address: @address } %>
+
+<div>
+Owners
+  <% @nearby_owners.each do |owner| %>
+    <div>
+      <%= owner.first_name %>
+    </div>
+  <% end %>
+</div>
