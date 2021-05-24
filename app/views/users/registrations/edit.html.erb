@@ -24,10 +24,10 @@
         </h1>
       <% end %>
 
-      <div class="printers">
-        <div class="printer-list">
+      <div class="printers-filaments-div">
+        <div class="printer-filament-list">
           <% if !(current_user.has_role? :owner)%>
-            <p>
+            <p class="call-to-action-question">
               Do you own a 3d printer?
             </p>
             <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary print-sell-button", id: 'owner_button' %>
@@ -39,8 +39,10 @@
           <% end %>
         </div>
 
-        <%= button_tag class: "btn add-button" do %>
-          <span class="material-icons">add</span>
+        <% if (current_user.has_role? :owner)%>
+          <%= button_tag class: "btn add-button" do %>
+            <span class="material-icons">add</span>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -112,20 +114,20 @@
       <p><%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
     </div>
 
-    <div class="filaments">
-        <div class="filament-list">
-          <% if (current_user.has_role? :owner)%>
-            <h5> Filaments: </h5>
-            <% current_user.filaments.each do |filament| %>
-              <%= render partial: 'shared/filament_card', locals: { printer: printer } %>
-            <% end %>
+    <% if (current_user.has_role? :owner)%>
+      <div class="printers-filaments-div filaments">
+          <div class="printer-filament-list">
+              <h5> Filaments: </h5>
+              <% current_user.filaments.each do |filament| %>
+                <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
+              <% end %>
+          </div>
+
+          <%= button_tag class: "btn add-button" do %>
+            <span class="material-icons">add</span>
           <% end %>
         </div>
-
-        <%= button_tag class: "btn add-button" do %>
-          <span class="material-icons">add</span>
-        <% end %>
-      </div>
+      <% end %>
 
     
 </div>

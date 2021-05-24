@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :filaments_and_resins
 
   has_and_belongs_to_many :printers
+  has_and_belongs_to_many :filaments
 
   has_one_attached :profile_pic
 

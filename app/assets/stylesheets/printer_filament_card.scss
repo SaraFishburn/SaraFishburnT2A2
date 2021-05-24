@@ -1,12 +1,21 @@
-.printer-card {
-  width: 200px;
+.printer-filament-card {
+  width: 225px;
   background-color: white;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+
+  .filament-details {
+    display: flex;
+    justify-content: space-between;
+
+    span:last-child {
+      margin-left: 20px;
+    }
+  }
 
   .delete-button {
     width: 40px;
