@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :printers
   has_many :filaments_and_resins
 
+  has_and_belongs_to_many :printers
+
   has_one_attached :profile_pic
 
   scope :within_range, lambda { |lat, long, dist|
@@ -18,5 +20,8 @@ class User < ApplicationRecord
                               .where(latitude: (lat - dist)..(lat + dist))
                               .where(longitude: (long - dist)..(long + dist))
                        }
-  
+
+  def public_name
+    nickname || first_name
+  end
 end

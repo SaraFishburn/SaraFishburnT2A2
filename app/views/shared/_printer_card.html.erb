@@ -1,0 +1,12 @@
+<div class="printer-card">
+  <span class='printer-details'>
+    <div><%= printer.printer_brand %></div>
+    <div><%= printer.printer_model %></div>
+    <div><%="(#{printer.printer_type})"%></div>
+  </span>
+  <span>
+    <%= button_tag class: "delete-button btn" do %>
+      <span class="material-icons">delete</span>
+    <% end %>
+  </span>
+</div>

@@ -37,6 +37,7 @@
 
 * {
   font-family: 'Montserrat', sans-serif;
+  color: var(--dark-4);
 }
 
 ul {
@@ -69,6 +70,7 @@ body {
       h1 {
         margin: 0;
         margin-left: 10px;
+        color: black;
       }
     }
 
@@ -135,10 +137,8 @@ body {
           }
           
           .placeholder-profile-pic {
+            @extend .user-image;
             border: 1px solid var(--dark-2);
-            height: var(--img-height);
-            width: var(--img-height);
-            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -209,3 +209,4 @@ body {
 
 @import 'registrations.scss';
 @import 'owner_card.scss';
+@import 'printer_card.scss';

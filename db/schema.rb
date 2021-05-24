@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_054218) do
+ActiveRecord::Schema.define(version: 2021_05_23_114424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 2021_05_21_054218) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "printers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "printer_brand"
+    t.string "printer_model"
+    t.string "printer_type", null: false
+  end
+
+  create_table "printers_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "printer_id", null: false
+    t.index ["user_id", "printer_id"], name: "index_printers_users_on_user_id_and_printer_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -68,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_054218) do
     t.decimal "longitude"
     t.string "address"
     t.string "suburb_and_postcode"
-    t.integer "rating"
+    t.decimal "rating"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

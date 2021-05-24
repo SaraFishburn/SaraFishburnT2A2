@@ -1,5 +1,60 @@
+
+.owner-card {
+  background-color: white;
+  width: 800px;
+  border-radius: 15px;
+  box-shadow: var(--dp-4);
+  border: 1px solid var(--light-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  margin-bottom: 10px;
+
+  .num-reviews {
+    display: inline;
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  p:nth-child(1) {
+    margin-bottom: 10px;
+  }
+
+  .pic-name-printer {
+    display: flex;
+    align-items: center;
+  
+    .pic-and-placeholder {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+  
+    .placeholder-profile-pic {
+      border: 1px solid var(--dark-2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      span {
+        color: var(--dark-2);
+        font-size: 3rem;
+      }
+    }
+  }
+
+}
+
 .rating-stars {
   font-size: 0;
+  display: flex;
 
   .full-star {
     color: orange;

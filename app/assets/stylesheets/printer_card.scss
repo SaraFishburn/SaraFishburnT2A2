@@ -1,0 +1,25 @@
+.printer-card {
+  width: 200px;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  .delete-button {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    span {
+      @extend .delete-button;
+      color: white;
+    }
+  }
+}

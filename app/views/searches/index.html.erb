@@ -5,11 +5,10 @@
 
 <%= render partial: 'shared/address_search', locals: { default_address: @address } %>
 
-<div>
-Owners
+<div class="search-results">
   <% @nearby_owners.each do |owner| %>
-    <div>
-      <%= owner.first_name %>
-    </div>
+    <% unless owner.printers.length.zero? %>
+      <%= render partial: 'shared/owner_card', locals: { user: owner } %>
+    <% end %>
   <% end %>
 </div>

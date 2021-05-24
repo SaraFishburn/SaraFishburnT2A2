@@ -1,7 +1,7 @@
 <script>
-  function addressLatLong() {
+  function addressLatLong(element_id) {
     const url = new URL("https://maps.googleapis.com/maps/api/geocode/json")
-    const address = document.getElementById("user_address").value
+    const address = document.getElementById(element_id).value
 
     params = {
       address: address,
@@ -12,22 +12,24 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    const address_element = document.getElementById("address")
     const user_address_element = document.getElementById("user_address")
-    
+
+    const address_element = document.getElementById("address")
+
     address_element && address_element.addEventListener('change', function() {
       setTimeout(() => {
-        addressLatLong().then((res) => res.json()).then(function(json) {
+        addressLatLong("address").then((res) => res.json()).then(function(json) {
           if(!json.results[0]) return
           document.getElementById('latitude').value = json.results[0].geometry.location.lat
           document.getElementById('longitude').value = json.results[0].geometry.location.lng
         })
       }, 1);
     })
+    
 
     user_address_element && user_address_element.addEventListener('change', function() {
       setTimeout(() => {
-        addressLatLong().then((res) => res.json()).then(function(json) {
+        addressLatLong("user_address").then((res) => res.json()).then(function(json) {
           if(!json.results[0]) return
 
           const suburb = (json.results[0].address_components.find(element => element.types.includes('locality'))).long_name

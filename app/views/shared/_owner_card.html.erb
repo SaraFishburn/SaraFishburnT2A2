@@ -1,38 +1,41 @@
 <div class="owner-card">
-  <span>
-    <% render 'shared/profile_pic'%>
+  <span class="pic-name-printer">
+    <span>
+      <%= render partial: 'shared/profile_pic', locals: { user: user } %>
+    </span>
+    <span>
+      <p> <%= user.public_name %></p>
+      <p> <%= "#{user.printers[0].printer_brand} #{user.printers[0].printer_model} (#{user.printers[0].printer_type})" %></p>
+      <% if user.printers.length > 1 %>
+        <p> <%= "+#{printers.length - 1} others"%></p>
+      <% end %>
+    </span>
   </span>
   <span>
-    <p> <%= name %></p>
-    <p> <%= printers[0] %></p>
-    <% if printers.length > 1 %>
-      <p> <%= "+#{printers.length - 1} others"%></p>
-    <% end %>
-  </span>
-  <span>
-    <%= "#{suburb}, #{postcode}" %>
+    <%= user.suburb_and_postcode %>
   </span>
 
   <span class="rating-stars">
-    <% (rating % 1).times do |i| %>
+    <% user.rating = 0 if !user.rating %>
+    <% (user.rating.to_i).times do |i| %>
       <span class="material-icons full-star">star</span>
     <% end %>
 
-    <% unless rating.to_i.zero? %>
+    <% unless (user.rating % 1).zero? %>
       <span class="fraction-star">
         <div class="material-icons base-star">star</div>
-        <div class="top-star-container" style="width: calc(var(--star-size) * <%= fraction_star %>);">
+        <div class="top-star-container" style="width: calc(var(--star-size) * <%= user.rating % 1 %>);">
           <div class="material-icons top-star">star</div>
         </div>
       </span>
     <% end %>
 
-    <% (5 - rating.ceil).times do |i| %>
+    <% (5 - user.rating.ceil).times do |i| %>
       <span class="material-icons grey-star">star</span>
     <% end %>
-  </span>
-  <span>
-    <%= num_reviews %>
+    <div class="num-reviews">
+      <%= 3 %>
+    </div>
   </span>
 
 </div>

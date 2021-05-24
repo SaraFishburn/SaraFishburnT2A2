@@ -1,9 +1,9 @@
-<% if current_user.profile_pic.attached? %>
-  <div class="profile-pic">
-    <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza' %>
+<% if user.profile_pic.attached? %>
+  <div class="profile-pic pic-and-placeholder">
+    <%= cl_image_tag user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza'%>
   </div>
 <% else %>
-  <div class="placeholder-profile-pic">
+  <div class="placeholder-profile-pic pic-and-placeholder">
     <span class="material-icons">tag_faces</span>
   </div>
 <% end %>

@@ -5,8 +5,8 @@
     <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="pic-name-printers">
-      <%= render 'shared/profile_pic'%>
-
+     
+       <%= render partial: 'shared/profile_pic', locals: { user: current_user } %>
 
       <div>
         <%= f.file_field :profile_pic %>
@@ -25,15 +25,22 @@
       <% end %>
 
       <div class="printers">
-        <% if !(current_user.has_role? :owner)%>
-          <p>
-            Do you own a 3d printer?
-          </p>
-          <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary", id: 'owner_button' %>
-        <% else %>
-          <div>
-            list of printers go here
-          </div>
+        <div class="printer-list">
+          <% if !(current_user.has_role? :owner)%>
+            <p>
+              Do you own a 3d printer?
+            </p>
+            <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary print-sell-button", id: 'owner_button' %>
+          <% else %>
+            <h5> Printers: </h5>
+            <% current_user.printers.each do |printer| %>
+              <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <%= button_tag class: "btn add-button" do %>
+          <span class="material-icons">add</span>
         <% end %>
       </div>
     </div>
@@ -104,4 +111,21 @@
 
       <p><%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
     </div>
+
+    <div class="filaments">
+        <div class="filament-list">
+          <% if (current_user.has_role? :owner)%>
+            <h5> Filaments: </h5>
+            <% current_user.filaments.each do |filament| %>
+              <%= render partial: 'shared/filament_card', locals: { printer: printer } %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <%= button_tag class: "btn add-button" do %>
+          <span class="material-icons">add</span>
+        <% end %>
+      </div>
+
+    
 </div>

@@ -1,0 +1,18 @@
+<div class="filament-card">
+  <span class='filament-details'>
+    <span>
+      <div><%= filament.filament_brand %></div>
+      <div><%= filament.filament_type %></div>
+    </span>
+    <span>
+      <div><%= filament.filament_color %></div>
+      <div><%= filament.filament_special_characteristic if filament.filament_special_characteristic %></div>
+    </span>
+
+  </span>
+  <span>
+    <%= button_tag class: "delete-button btn" do %>
+      <span class="material-icons">delete</span>
+    <% end %>
+  </span>
+</div>
