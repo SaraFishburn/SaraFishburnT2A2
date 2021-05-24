@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_114424) do
+ActiveRecord::Schema.define(version: 2021_05_24_050239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 2021_05_23_114424) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "filaments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "filament_brand"
+    t.string "filament_color"
+    t.string "filament_type", null: false
+    t.string "filament_special_characteristic"
+  end
+
+  create_table "filaments_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "filament_id", null: false
+    t.index ["user_id", "filament_id"], name: "index_filaments_users_on_user_id_and_filament_id"
   end
 
   create_table "printers", force: :cascade do |t|
