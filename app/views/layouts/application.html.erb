@@ -30,14 +30,16 @@
   <body>
     <nav>
       <div class="logo">
-        <%= link_to searches_path do %>
+        <%= link_to users_path do %>
           <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621581516/print3d_logo_n7yjae.svg", crop: :scale, height: 70, cloud_name: 'sazza' %>
+          <h1>Print3D.</h1>
         <% end %>
-        <h1>Print3D.</h1>
       </div>
 
       <% if user_signed_in? %>
-        <%= render partial: 'shared/address_search', locals: { default_address: '' } %>
+        <% unless controller.controller_name == 'registrations' && controller.action_name == 'index' %>
+          <%= render partial: 'shared/address_search', locals: { default_address: '' } %>
+        <% end %>
         <%= render 'shared/profile_dropdown' %>
       <% else %>
         <%= link_to "Login", new_user_session_path %>

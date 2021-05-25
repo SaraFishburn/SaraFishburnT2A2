@@ -25,4 +25,10 @@ class User < ApplicationRecord
   def public_name
     nickname || first_name
   end
+
+  before_save :make_owner
+
+  def make_owner
+    add_role :owner if !(has_role? :owner) && !address_change_to_be_saved.nil?
+  end
 end

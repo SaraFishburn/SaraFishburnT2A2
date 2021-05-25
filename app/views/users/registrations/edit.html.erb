@@ -1,51 +1,55 @@
 <%= javascript_pack_tag 'registrations_edit' %>
 
 <div class="registrations-edit">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "users/shared/error_messages", resource: resource %>
+  <div class="pic-name-printers">
 
-    <div class="pic-name-printers">
-     
-       <%= render partial: 'shared/profile_pic', locals: { user: current_user } %>
+  <div class="pic-and-edit-container">
+    <%= render partial: 'shared/profile_pic', locals: { user: current_user } %>
 
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "profile-pic-edit", method: :put }) do |f| %>
       <div>
         <%= f.file_field :profile_pic %>
-        <span class="material-icons">edit</span>
+        <%= f.submit name: "profile_pic_submit"%>
+        <span id="edit-profile-pic-icon" class="material-icons">edit</span>
       </div>
+    <% end %>
+  </div>
 
+    <% if current_user.nickname %>
+      <h1>
+        <%= current_user.nickname %>
+      </h1>
+    <% else %>
+      <h1>
+          <%= current_user.first_name %>
+      </h1>
+    <% end %>
 
-      <% if current_user.nickname %>
-        <h1>
-          <%= current_user.nickname %>
-        </h1>
-      <% else %>
-        <h1>
-            <%= current_user.first_name %>
-        </h1>
-      <% end %>
-
-      <div class="printers-filaments-div">
-        <div class="printer-filament-list">
-          <% if !(current_user.has_role? :owner)%>
-            <p class="call-to-action-question">
-              Do you own a 3d printer?
-            </p>
-            <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary print-sell-button", id: 'owner_button' %>
-          <% else %>
-            <h5> Printers: </h5>
-            <% current_user.printers.each do |printer| %>
-              <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
-            <% end %>
-          <% end %>
-        </div>
-
-        <% if (current_user.has_role? :owner)%>
-          <%= button_tag class: "btn add-button" do %>
-            <span class="material-icons">add</span>
+    <div class="printers-filaments-div">
+      <div class="printer-filament-list">
+        <% if !(current_user.has_role? :owner)%>
+          <p class="call-to-action-question">
+            Do you own a 3d printer?
+          </p>
+          <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary print-sell-button", id: 'owner_button' %>
+        <% else %>
+          <h5> Printers: </h5>
+          <% current_user.printers.each do |printer| %>
+            <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
           <% end %>
         <% end %>
       </div>
+
+      <% if (current_user.has_role? :owner)%>
+        <%= button_tag class: "btn add-button" do %>
+          <span class="material-icons">add</span>
+        <% end %>
+      <% end %>
     </div>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="main-form-fields">
         <h2>Your 
@@ -80,8 +84,21 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
+        <div id="account-address-field" style="display: <%= current_user.has_role?(:owner) ? '' : 'none' %>">
+          <%= render partial: 'shared/address_field', locals: { form: f, default_address: current_user.address } %>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
+          <%= f.hidden_field :suburb_and_postcode %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Save Changes" %>
+        </div>
+
+        <h2> Update Password </h2>
+
         <div class="field">
-          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.label :password %> <br />
           <%= f.password_field :password, autocomplete: "new-password" %>
           <% if @minimum_password_length %>
             <br/>
@@ -94,15 +111,9 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
 
-        <div id="account-address-field" style="display: <%= current_user.has_role?(:owner) ? '' : 'none' %>">
-          <%= render partial: 'shared/address_field', locals: { form: f, default_address: current_user.address } %>
-          <%= f.hidden_field :latitude %>
-          <%= f.hidden_field :longitude %>
-          <%= f.hidden_field :suburb_and_postcode %>
-        </div>
 
         <div class="field">
-          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.label :current_password %> <i>(we need your current password to confirm password update)</i><br />
           <%= f.password_field :current_password, autocomplete: "current-password" %>
         </div>
 
@@ -128,6 +139,5 @@
           <% end %>
         </div>
       <% end %>
-
-    
+  
 </div>

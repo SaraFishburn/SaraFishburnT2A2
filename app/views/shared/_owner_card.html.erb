@@ -7,7 +7,7 @@
       <p> <%= user.public_name %></p>
       <p> <%= "#{user.printers[0].printer_brand} #{user.printers[0].printer_model} (#{user.printers[0].printer_type})" %></p>
       <% if user.printers.length > 1 %>
-        <p> <%= "+#{printers.length - 1} others"%></p>
+        <p> <%= "+#{user.printers.length - 1} others"%></p>
       <% end %>
     </span>
   </span>
