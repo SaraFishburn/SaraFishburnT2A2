@@ -1,14 +1,34 @@
-<div class="chatroom-list">
-  <% current_user.chatrooms.each do |chatroom| %>
-    <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
-  <% end %>
+<%= javascript_pack_tag 'chatrooms_show' %>
+
+<div id="chatrooms-show">
+  <div class="chatroom-list">
+    <% current_user.chatrooms.each do |chatroom| %>
+      <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
+    <% end %>
+  </div>
+
+  <div class="chatroom">
+    <div class="chatroom-header">
+      <%= render partial: 'shared/user_card', locals: { user: @other_user } %>
+    </div>
+    <div id="chatroom-body">
+      <% @chatroom.messages.reverse.each do |message| %>
+        <div class="<%= message.user == current_user ? 'self' : 'other' %> message-bubble">
+          <%= render partial: 'shared/message', locals: { message: message } %>
+        </div>
+      <% end %>
+
+      <%# for some reason my top message won't move down without the following buffer div :(  %>
+      <div class="message-bubble"></div>
+
+    </div>
+    <div class="chatroom-message-input">
+      <%= form_with url: chatroom_messages_path(@chatroom), method: :post, html: { autocomplete: :off }, id: "message-input" do |f| %>
+        <%= f.text_field :content, Placeholder: "Aa", class: "text-field" %>
+        <%= button_tag "Send", type: "submit", class: "submit-button" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<div class="chatroom">
-  <div class="chatroom-header">
-    <%= render partial: 'shared/user_card', locals: { user: @other_user } %>
-  </div>
-  <div class="chatroom-message-input">
-    <%= form_for %>
-  </div>
-</div>
+<input type="hidden" id="user_id" value=<%= current_user.id %>>

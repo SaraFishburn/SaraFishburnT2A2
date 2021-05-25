@@ -1,3 +1,120 @@
 // Place all the styles related to the chatrooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+body {
+  overflow: hidden;
+}
+
+#chatrooms-show {
+  display: flex;
+  height: calc(100vh - 70px);
+
+  .chatroom-list {
+    @extend #chatrooms-show;
+
+    width: 250px;
+    min-width: 250px;
+    background-color: var(--light-2);
+    box-shadow: var(--dp4);
+    padding: 20px 0px;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .chatroom {
+    flex-grow: 1;
+    position: relative;
+
+    .chatroom-header {
+      .user-card {
+        padding: 15px;
+        border-radius: 0;
+        margin: 0;
+        width: unset;
+
+        .pic-and-placeholder {
+          height: 50px;
+          width: 50px;
+  
+          img {
+            width: 50px;
+          }
+        }
+      }
+    }
+  
+    #chatroom-body {
+      display: flex;
+      height: calc(100vh - 160px);
+      flex-direction: column-reverse;
+      padding: 30px;
+      overflow: scroll;
+      padding-bottom: 100px;
+    
+      .message-bubble {
+        border-radius: 25px;
+        width: fit-content;
+        max-width: 300px;
+        padding: 8px 25px;
+        margin: 5px;
+        z-index: -1;
+      }
+      
+      .self {
+        background-color: blue;
+        align-self: flex-end;
+        span {
+          color: white;
+        }
+      }
+      
+      .other {
+        background-color: var(--light-2);
+      
+        span {
+          color: black;
+        }
+      }
+    }
+  
+    .chatroom-message-input {
+      position: absolute;
+      width: 100%;
+      bottom: 20px;
+      display: flex;
+      justify-content: center;
+
+      form {
+        width: 90%;
+        position: relative;
+        
+        .text-field {
+          height: 50px;
+          border-radius: 25px;
+          padding: 0px 90px 0px 30px;
+          width: 100%;
+          border: none;
+          box-shadow: var(--dp4);
+        }
+  
+        .submit-button {
+          position: absolute;
+          right: 0;
+          height: 50px;
+          width: 80px;
+          border-radius: 0px 25px 25px 0px;
+          cursor: pointer;
+          background-color: blue;
+          color: white;
+          border: none;
+        }
+
+        .submit-button:focus, .text-field:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+}

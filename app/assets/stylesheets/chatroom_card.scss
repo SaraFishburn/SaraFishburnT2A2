@@ -1,0 +1,28 @@
+.chatroom-card {
+  background-color: white;
+  box-shadow: var(--dp4);
+  display: flex;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+
+  .pic-and-placeholder {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+}

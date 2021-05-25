@@ -6,4 +6,14 @@ class Chatroom < ApplicationRecord
   def other_user(current_user)
     (users - [current_user]).first
   end
+
+  def self.chatroom_with_users(user1, user2)
+    existing_chatroom = user1.chatrooms.joins(:users).where(users: user2).first
+    return existing_chatroom if existing_chatroom.exists?
+
+    chatroom = create
+    chatroom << user1
+    chatroom << user2
+    chatroom.save
+  end
 end
