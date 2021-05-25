@@ -1,0 +1,14 @@
+<div class="chatroom-list">
+  <% current_user.chatrooms.each do |chatroom| %>
+    <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
+  <% end %>
+</div>
+
+<div class="chatroom">
+  <div class="chatroom-header">
+    <%= render partial: 'shared/user_card', locals: { user: @other_user } %>
+  </div>
+  <div class="chatroom-message-input">
+    <%= form_for %>
+  </div>
+</div>

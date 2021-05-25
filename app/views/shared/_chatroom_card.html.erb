@@ -1,0 +1,11 @@
+<div>
+  <span>
+    <%= render partial: 'shared/profile_pic', locals: { user: other_user } %>
+  </span>
+  <span>
+    <p> <%= other_user.public_name %></p>
+    <% if other_user.has_role? :owner %>
+      <p> <%= other_user.printers[0] %></p>
+    <% end %>
+  </span>
+</div>

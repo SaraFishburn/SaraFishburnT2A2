@@ -9,9 +9,11 @@ class User < ApplicationRecord
   has_many :ratings
   has_many :printers
   has_many :filaments_and_resins
+  has_many :messages
 
   has_and_belongs_to_many :printers
   has_and_belongs_to_many :filaments
+  has_and_belongs_to_many :chatrooms
 
   has_one_attached :profile_pic
 

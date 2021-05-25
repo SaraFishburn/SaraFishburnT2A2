@@ -1,0 +1,44 @@
+<div class="user-card">
+  <span class="pic-name-printer">
+    <span>
+      <%= render partial: 'shared/profile_pic', locals: { user: user } %>
+    </span>
+    <span>
+      <p> <%= user.public_name %></p>
+
+      <% if user.has_role? :owner %>
+
+            <p> <%= "#{user.printers[0].printer_brand} #{user.printers[0].printer_model} (#{user.printers[0].printer_type})" %></p>
+            <% if user.printers.length > 1 %>
+              <p class="other-printers"> <%= "+#{user.printers.length - 1} others"%></p>
+            <% end %>
+          </span>
+        </span>
+        <span>
+          <%= user.suburb_and_postcode %>
+        </span>
+
+        <span class="rating-stars">
+          <% user.rating = 0 if !user.rating %>
+          <% (user.rating.to_i).times do |i| %>
+            <span class="material-icons full-star">star</span>
+          <% end %>
+
+          <% unless (user.rating % 1).zero? %>
+            <span class="fraction-star">
+              <div class="material-icons base-star">star</div>
+              <div class="top-star-container" style="width: calc(var(--star-size) * <%= user.rating % 1 %>);">
+                <div class="material-icons top-star">star</div>
+              </div>
+            </span>
+          <% end %>
+
+          <% (5 - user.rating.ceil).times do |i| %>
+            <span class="material-icons grey-star">star</span>
+          <% end %>
+          <div class="num-reviews">
+            <%= 3 %>
+          </div>
+      <% end %>
+  </span>
+</div>
