@@ -6,15 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
     for (let i = 0; i < inputs.length; i++) {
       const searchBox = new google.maps.places.Autocomplete(inputs[i]);
-  
-      // Listen for the event fired when the user selects a prediction and retrieve
-      // more details for that place.
-      searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-  
-        if (places.length == 0) {
-          return;
-        }
+
+      searchBox.addListener("place_changed", () => {
+        const place = searchBox.getPlace();
+        inputs[i].dispatchEvent(new CustomEvent('place_changed', { detail: place }))
       })
     }
   }

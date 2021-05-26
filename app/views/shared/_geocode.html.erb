@@ -1,47 +1,22 @@
 <script>
-  function addressLatLong(element_id) {
-    const url = new URL("https://maps.googleapis.com/maps/api/geocode/json")
-    const address = document.getElementById(element_id).value
-
-    params = {
-      address: address,
-      key: "<%= ENV["GOOGLE_PLACES_API_KEY"] %>"
-    }
-    url.search = new URLSearchParams(params).toString()
-    return fetch(url)
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     const user_address_element = document.getElementById("user_address")
-
     const address_element = document.getElementById("address")
 
-    address_element && address_element.addEventListener('change', function() {
-      setTimeout(() => {
-        addressLatLong("address").then((res) => res.json()).then(function(json) {
-          if(!json.results[0]) return
-          document.getElementById('latitude').value = json.results[0].geometry.location.lat
-          document.getElementById('longitude').value = json.results[0].geometry.location.lng
-        })
-      }, 1);
+    address_element && address_element.addEventListener('place_changed', function(e) {
+      document.getElementById('latitude').value = e.detail.geometry.location.lat()
+      document.getElementById('longitude').value = e.detail.geometry.location.lng()
+
+      document.getElementById("address-form").submit()
     })
-    
 
-    user_address_element && user_address_element.addEventListener('change', function() {
-      setTimeout(() => {
-        addressLatLong("user_address").then((res) => res.json()).then(function(json) {
-          if(!json.results[0]) return
+    user_address_element && user_address_element.addEventListener('place_changed', function() {
+      const suburb = (e.detail.address_components.find(element => element.types.includes('locality'))).long_name
+      const postcode = (e.detail.address_components.find(element => element.types.includes('postal_code'))).long_name
 
-          const suburb = (json.results[0].address_components.find(element => element.types.includes('locality'))).long_name
-          const postcode = (json.results[0].address_components.find(element => element.types.includes('postal_code'))).long_name
-
-          document.getElementById('user_latitude').value = json.results[0].geometry.location.lat
-          document.getElementById('user_longitude').value = json.results[0].geometry.location.lng
-          document.getElementById('user_suburb_and_postcode').value = `${suburb}, ${postcode}`
-        })
-      }, 1);
+      document.getElementById('user_latitude').value = e.detail.geometry.location.lat()
+      document.getElementById('user_longitude').value = e.detail.geometry.location.lng()
+      document.getElementById('user_suburb_and_postcode').value = `${suburb}, ${postcode}`
     })
   })
 </script>
-
-

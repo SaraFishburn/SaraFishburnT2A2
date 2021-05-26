@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'autofill' %>
 <%= render 'shared/geocode' %>
 
-<%= form_with url: '/users', method: :get do |f|%>
+<%= form_with url: '/users', method: :get, html: { id: 'address-form' } do |f|%>
   <div class="input-group mb-3">
     <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
     <%= f.hidden_field :longitude %>
