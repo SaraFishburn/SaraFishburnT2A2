@@ -1,5 +1,5 @@
 class Chatroom < ApplicationRecord
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   has_and_belongs_to_many :users
 
@@ -15,5 +15,6 @@ class Chatroom < ApplicationRecord
     chatroom.users << user1
     chatroom.users << user2
     chatroom.save
+    chatroom
   end
 end

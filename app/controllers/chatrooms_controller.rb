@@ -1,6 +1,8 @@
 class ChatroomsController < ApplicationController
   def show
     @chatroom = Chatroom.find(chatroom_params[:id])
+    redirect_to root_path unless @chatroom && @chatroom.users.include?(current_user)
+
     @chatrooms = current_user.chatrooms.order(updated_at: :desc)
     @other_user = @chatroom.other_user(current_user)
   end

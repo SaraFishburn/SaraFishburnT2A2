@@ -5,9 +5,9 @@
 
     <%# Image with notification bubble %>
     <div class="user-image">
-      <% if current_user.profile_pic.attached? %>
+      <% if current_user_profile_pic.attached? %>
         <div class="profile-pic">
-          <%= cl_image_tag current_user.profile_pic.key, crop: :scale, width: 30, cloud_name: 'sazza' %>
+          <%= cl_image_tag current_user_profile_pic.key, crop: :scale, width: 30, cloud_name: 'sazza' %>
         </div>
       <% else %>
         <div class="placeholder-profile-pic"><span class="material-icons"> tag_faces </span></div>
@@ -31,7 +31,9 @@
       <% if current_user.has_role? :owner %>
         <%= link_to "View Profile", users_show_path(current_user), class: "dropdown-item separator" %>
       <% end %>
-      <%= link_to "Messages", current_user.chatrooms.order(updated_at: :desc).first, method: :get, class: "dropdown-item separator"%>
+      <% unless current_user_chatrooms.empty? %>
+        <%= link_to "Messages", current_user_chatrooms.order(updated_at: :desc).first, method: :get, class: "dropdown-item separator"%>
+      <% end %>
       <%= link_to "Account", edit_user_registration_path, method: :get, class: "dropdown-item"%>
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item signout-padding"%>
     </div>

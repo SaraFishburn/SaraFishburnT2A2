@@ -22,7 +22,7 @@ class FilamentsController < ApplicationController
   end
 
   def set_filament_types
-    @filament_types = ['PLA', 'silk PLA', 'ABS', 'TPU', 'PETG', 'Nylon', 'Wood', 'Resin']
+    @filament_types = ['PLA', 'Silk PLA', 'ABS', 'TPU', 'PETG', 'Nylon', 'Wood', 'Resin']
   end
 
   def set_filament_colors

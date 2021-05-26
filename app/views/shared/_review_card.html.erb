@@ -1,0 +1,6 @@
+<span>
+  <p><%= review.reviewer.public_name %></p>
+  <%= render partial: 'shared/star_rating', locals: { average_rating: review.rating, reviews: nil } %>
+  <p><%= review.content %></p>
+</span>
+

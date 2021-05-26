@@ -3,9 +3,33 @@
 
 <%= form_with url: '/users', method: :get, html: { id: 'address-form' } do |f|%>
   <div class="input-group mb-3">
+
+    <%= f.label :printer_type %>
+    <%= f.radio_button :printer_type, printer_types.join(","), checked: params[:printer_type] == printer_types.join(",") %>
+      <%= f.label :all %>
+    <% printer_types.each do |p| %>
+      <%= f.radio_button :printer_type, p, checked: params[:printer_type] == p %>
+      <%= f.label p, style: "text-transform: uppercase;" %>
+    <% end %>
+
+    <%= f.label :distance %>
+    <%= f.range_field :distance, value: params[:distance] || 50, min: 0, max: 100, list: 'tickmarks' %>
+    <datalist id="tickmarks">
+      <option value="10" label="10km"></option>
+      <option value="20"></option>
+      <option value="30"></option>
+      <option value="40"></option>
+      <option value="50" label="50km"></option>
+      <option value="60"></option>
+      <option value="70"></option>
+      <option value="80"></option>
+      <option value="90"></option>
+      <option value="100" label="100km"></option>
+    </datalist>
+
     <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
-    <%= f.hidden_field :longitude %>
-    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude, value: params[:longitude] %>
+    <%= f.hidden_field :latitude, value: params[:latitude] %>
 
     <div class="input-group-append">
       <%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>

@@ -3,14 +3,18 @@
   <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621586175/print3d_logo_white_erl3fm.svg", crop: :scale, width: 200, cloud_name: 'sazza' %>
 </div>
 
-<%= render partial: 'shared/address_search', locals: { default_address: @address } %>
+<% if current_user %>
+  <%= render partial: 'shared/address_search', locals: { default_address: @address } %>
 
-<div class="search-results">
-  <% @nearby_owners.each do |owner| %>
-    <% unless owner.printers.length.zero? || owner == current_user %>
-      <%= link_to users_show_path(owner) do %>
-        <%= render partial: 'shared/user_card', locals: { user: owner } %>
+  <div class="search-results">
+    <% @nearby_owners.each do |owner| %>
+      <% unless owner.printers.length.zero? || owner == current_user %>
+        <%= link_to users_show_path(owner) do %>
+          <%= render partial: 'shared/user_card', locals: { user: owner } %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <%= link_to 'Join The Community Now', new_user_registration_path %>
+<% end %>

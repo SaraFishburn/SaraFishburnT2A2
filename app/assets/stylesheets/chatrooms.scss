@@ -1,13 +1,11 @@
 // Place all the styles related to the chatrooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-body {
-  overflow: hidden;
-}
 
 #chatrooms-show {
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 80px);
+  overflow: hidden;
 
   .chatroom-list {
     @extend #chatrooms-show;
@@ -52,7 +50,7 @@ body {
   
     #chatroom-body {
       display: flex;
-      height: calc(100vh - 160px);
+      height: calc(100vh - 150px);
       flex-direction: column-reverse;
       padding: 30px;
       overflow: scroll;

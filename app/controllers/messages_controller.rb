@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
 
   def show
-    # placeholder
+    chatroom = Chatroom.find(params[:chatroom_id])
+    return redirect_to root_path unless chatroom&.users&.include?(current_user)
   end
 
   def new
@@ -9,12 +10,13 @@ class MessagesController < ApplicationController
   end
 
   def create
-    return if message_params[:content].empty?
+    chatroom = Chatroom.find(params[:chatroom_id])
+    return if message_params[:content].empty? || !chatroom.users.include?(current_user)
 
     @message = Message.new(message_params)
     @message.user = current_user
     @message.save
-    @message.chatroom.update(updated_at: Time.now)
+    chatroom.update(updated_at: Time.now)
 
     SendMessageJob.perform_later(@message)
   end

@@ -17,7 +17,7 @@
           <span>
             <%= user.suburb_and_postcode %>
           </span>
-          <%= render partial: 'shared/star_rating', locals: { user: user } %>
+          <%= render partial: 'shared/star_rating', locals: { average_rating: user.average_rating, reviews: user.reviews } %>
         <% end %>
     </span>
 </div>
