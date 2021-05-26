@@ -25,10 +25,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: var(--dp8);
+    }
     
     span {
       @extend .delete-button;
+
       color: white;
+      background-color: transparent;
+      
+      &:hover {
+        box-shadow: none;
+        transform: none;
+      }
     }
   }
 }

@@ -6,13 +6,14 @@
     </span>
     <span>
       <div><%= filament.filament_color %></div>
-      <div><%= filament.filament_special_characteristic if filament.filament_special_characteristic %></div>
     </span>
 
   </span>
-  <span>
-    <%= button_tag class: "delete-button btn" do %>
-      <span class="material-icons">delete</span>
-    <% end %>
-  </span>
+  <% if controller.controller_name == 'registrations' && controller.action_name == 'edit' %>
+    <span>
+      <%= button_to filament_path(filament), method: :delete, class: "delete-button btn" do %>
+        <span class="material-icons">delete</span>
+      <% end %>
+    </span>
+  <% end %>
 </div>

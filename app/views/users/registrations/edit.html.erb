@@ -41,7 +41,7 @@
       </div>
 
       <% if (current_user.has_role? :owner)%>
-        <%= button_tag class: "btn add-button" do %>
+        <%= button_to new_printer_path, class: "btn add-button", method: :get do %>
           <span class="material-icons">add</span>
         <% end %>
       <% end %>
@@ -128,13 +128,13 @@
     <% if (current_user.has_role? :owner)%>
       <div class="printers-filaments-div filaments">
           <div class="printer-filament-list">
-              <h5> Filaments: </h5>
+              <h5> Filaments & Resins: </h5>
               <% current_user.filaments.each do |filament| %>
                 <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
               <% end %>
           </div>
 
-          <%= button_tag class: "btn add-button" do %>
+          <%= button_to new_filament_path, class: "btn add-button", method: :get do %>
             <span class="material-icons">add</span>
           <% end %>
         </div>

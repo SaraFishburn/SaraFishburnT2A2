@@ -32,6 +32,12 @@ body {
         border-radius: 0;
         margin: 0;
         width: unset;
+        cursor: unset;
+
+        &:hover {
+          box-shadow: var(--dp4);
+          transform: none;
+        }
 
         .pic-and-placeholder {
           height: 50px;

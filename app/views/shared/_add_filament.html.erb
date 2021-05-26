@@ -1,0 +1,23 @@
+<div>
+  <span class="material-icons"> close </span>
+  <%= form_with url: filaments_path, method: :post do |f| %>
+    <h4> Add a filament or resin </h4>
+
+    <%= f.label :filament_brand%>
+    <%= f.text_field :filament_brand %>
+
+    <%= f.label :filament_color %>
+    <% @filament_colors.each do |p| %>
+      <%= f.radio_button :filament_color, p %>
+      <%= f.label :filament_color, p %>
+    <% end %>
+
+    <%= f.label :filament_type %>
+    <% @filament_types.each do |p| %>
+      <%= f.radio_button :filament_type, p %>
+      <%= f.label :filament_type, p %>
+    <% end %>
+
+    <%= f.submit "Add"%>
+  <% end %>
+</div>

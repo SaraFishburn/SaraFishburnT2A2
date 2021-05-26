@@ -5,8 +5,10 @@
     <div><%="(#{printer.printer_type})"%></div>
   </span>
   <span>
-    <%= button_tag class: "delete-button btn" do %>
+  <% if controller.controller_name == 'registrations' && controller.action_name == 'edit' %>
+    <%= button_to printer_path(printer), method: :delete, class: "delete-button btn" do %>
       <span class="material-icons">delete</span>
     <% end %>
+  <% end %>
   </span>
 </div>

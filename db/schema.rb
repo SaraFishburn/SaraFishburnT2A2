@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2021_05_25_040416) do
     t.string "filament_brand"
     t.string "filament_color"
     t.string "filament_type", null: false
-    t.string "filament_special_characteristic"
   end
 
   create_table "filaments_users", id: false, force: :cascade do |t|

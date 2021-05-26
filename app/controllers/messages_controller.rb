@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def show
     # placeholder
   end

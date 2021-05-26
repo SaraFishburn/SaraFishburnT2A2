@@ -6,12 +6,18 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def show
+    @user = User.where(id: params[:id])[0]
   end
 
   protected
 
   def update_resource(resource, params)
+    puts params
     if params.dig(:user, :password).blank? && params.dig(:user, :password_confirmation).blank?
+      params.delete(:password)
+      params.delete(:confirm_password)
+      params.delete(:current_password)
+      # params.except(:password, :password_confirmation, :current_password) << this didnt work, not sure why
       resource.update_without_password(params)
     else
       super

@@ -1,0 +1,51 @@
+<div id="registrations-show">
+
+  <div class="pic-name-printers">
+    <%= render partial: 'shared/profile_pic', locals: { user: @user } %>
+
+    <h1><%= @user.public_name %></h1>
+    <h6><%= @user.suburb_and_postcode %></h6>
+    <%= render partial: 'shared/star_rating', locals: { user: @user } %>
+
+    <% if @user == current_user %>
+      <div class="message-button">
+        <%= "Chat with #{@user.public_name}" %> <span class="material-icons">sms</span>
+      </div>
+
+    <% else %>
+      <%= form_with url: chatrooms_path, method: :post, class: "message-button" do |f| %>
+        <%= f.hidden_field :user1, value: @user.id %>
+        <%= f.hidden_field :user2, value: current_user.id %>
+        <%= button_tag type: "submit" do %>
+          <%= "Chat with #{@user.public_name}" %> <span class="material-icons">sms</span>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <div class="printers-filaments-div">
+      <div class="printer-filament-list">
+        <h5> Select a Printer: </h5>
+        <% @user.printers.each do |printer| %>
+          <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
+        <% end %>
+      </div>
+
+      <%= button_tag class: "btn add-button" do %>
+        <span class="material-icons">add</span>
+      <% end %>
+
+    </div>
+
+  </div>
+  <div class="filaments">
+    <div class="printer-filament-list">
+        <h5> Filaments Available: </h5>
+        <% current_user.filaments.each do |filament| %>
+          <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
+        <% end %>
+    </div>
+
+  </div>
+
+
+</div>

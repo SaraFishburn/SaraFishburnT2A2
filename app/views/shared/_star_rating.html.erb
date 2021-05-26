@@ -1,0 +1,22 @@
+<span class="star-rating">
+  <% user.rating = 0 if !user.rating %>
+  <% (user.rating.to_i).times do |i| %>
+    <span class="material-icons full-star">star</span>
+  <% end %>
+
+  <% unless (user.rating % 1).zero? %>
+    <span class="fraction-star">
+      <div class="material-icons base-star">star</div>
+      <div class="top-star-container" style="width: calc(var(--star-size) * <%= user.rating % 1 %>);">
+        <div class="material-icons top-star">star</div>
+      </div>
+    </span>
+  <% end %>
+
+  <% (5 - user.rating.ceil).times do |i| %>
+    <span class="material-icons grey-star">star</span>
+  <% end %>
+  <div class="num-reviews">
+    <%= 3 %>
+  </div>
+</span>

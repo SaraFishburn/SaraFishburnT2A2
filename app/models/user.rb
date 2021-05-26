@@ -33,4 +33,8 @@ class User < ApplicationRecord
   def make_owner
     add_role :owner if !(has_role? :owner) && !address_change_to_be_saved.nil?
   end
+
+  def ordered_rooms
+    chatrooms.joins(:messages).merge(Message.order(created_at: :desc))
+  end
 end

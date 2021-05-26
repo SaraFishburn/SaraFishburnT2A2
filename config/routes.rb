@@ -4,10 +4,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     root to: 'registrations#index'
     get '/users', to: 'registrations#index'
-    get '/users/:id', to: 'registrations#show'
+    get '/users/:id', to: 'registrations#show', as: 'users_show'
   end
 
-  resources :chatrooms, only: [:show] do
+  resources :filaments, only: [:create, :new, :destroy]
+  resources :printers, only: [:create, :new, :destroy]
+
+  resources :chatrooms, only: %i[show create] do
     resources :messages, only: [:create]
   end
 
