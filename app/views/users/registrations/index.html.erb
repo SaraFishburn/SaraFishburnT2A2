@@ -8,7 +8,9 @@
 <div class="search-results">
   <% @nearby_owners.each do |owner| %>
     <% unless owner.printers.length.zero? || owner == current_user %>
-      <%= render partial: 'shared/user_card', locals: { user: owner } %>
+      <%= link_to users_show_path(owner) do %>
+        <%= render partial: 'shared/user_card', locals: { user: owner } %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

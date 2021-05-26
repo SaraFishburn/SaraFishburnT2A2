@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def show
-    @user = User.where(id: params[:id])[0]
+    @user = User.find(params[:id])
   end
 
   protected

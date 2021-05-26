@@ -14,6 +14,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     @message.save
+    @message.chatroom.update(updated_at: Time.now)
 
     SendMessageJob.perform_later(@message)
   end

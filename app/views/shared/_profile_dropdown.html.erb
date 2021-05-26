@@ -31,7 +31,7 @@
       <% if current_user.has_role? :owner %>
         <%= link_to "View Profile", users_show_path(current_user), class: "dropdown-item separator" %>
       <% end %>
-      <%= link_to "Messages", current_user.ordered_rooms.first, method: :get, class: "dropdown-item separator"%>
+      <%= link_to "Messages", current_user.chatrooms.order(updated_at: :desc).first, method: :get, class: "dropdown-item separator"%>
       <%= link_to "Account", edit_user_registration_path, method: :get, class: "dropdown-item"%>
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item signout-padding"%>
     </div>

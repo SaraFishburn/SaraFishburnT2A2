@@ -2,7 +2,7 @@
 
 <div id="chatrooms-show">
   <div class="chatroom-list">
-    <% current_user.chatrooms.each do |chatroom| %>
+    <% @chatrooms.each do |chatroom| %>
       <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
     <% end %>
   </div>
