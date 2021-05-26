@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     get '/users/:id', to: 'registrations#show', as: 'users_show'
   end
 
-  resources :filaments, only: [:create, :new, :destroy]
-  resources :printers, only: [:create, :new, :destroy]
+  resources :filaments, only: %i[create new destroy]
+  resources :printers, only: %i[create new destroy]
 
   resources :chatrooms, only: %i[show create] do
     resources :messages, only: [:create]

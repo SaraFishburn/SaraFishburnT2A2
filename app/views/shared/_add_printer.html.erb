@@ -10,8 +10,9 @@
     <%= f.text_field :printer_model %>
 
     <%= f.label :printer_type %>
-    <% @printer_types.each do |p| %>
+    <% printer_types.each do |p| %>
       <%= f.radio_button :printer_type, p %>
+      <%= f.label :printer_type, p %>
     <% end %>
     <small>*Unfortunately, Print3d Society currently only supports FDM and SLA printers</small>
 

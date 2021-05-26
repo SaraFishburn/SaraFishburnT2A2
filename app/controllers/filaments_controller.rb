@@ -3,26 +3,22 @@ class FilamentsController < ApplicationController
   before_action :set_filament_types, only: %i[create new]
 
   def create
-    filament_brand = filaments_params[:filament_brand]
-    filament_type = filaments_params[:filament_type]
-    filament_color = filaments_params[:filament_color]
-    current_user.filaments.create(filament_brand: filament_brand, filament_type: filament_type,
-                                  filament_color: filament_color)
+    filament = Filament.find_or_create_by(filament_params)
+    current_user.filaments << filament unless current_user.filaments.include?(filament)
     redirect_to edit_user_registration_path
   end
 
   def new; end
 
   def destroy
-    @filament = Filament.where(id: filaments_params[:id])[0]
-    @filament.destroy
+    current_user.filaments.destroy(Filament.find(params[:id]))
     redirect_to edit_user_registration_path
   end
 
   private
 
-  def filaments_params
-    params.permit(:filament_brand, :filament_type, :filament_color, :id)
+  def filament_params
+    params.permit(:filament_brand, :filament_type, :filament_color)
   end
 
   def set_filament_types
