@@ -13,6 +13,7 @@ class ChatroomsController < ApplicationController
   end
 
   def create
+    # find users to be added to a chatroom give the user id's
     user1 = User.find(chatroom_params[:user1])
     user2 = User.find(chatroom_params[:user2])
 

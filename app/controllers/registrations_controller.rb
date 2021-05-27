@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
     # redirect to sign up page unless logged in
     return redirect_to new_user_registration_path unless current_user
 
+    # find and define user given their id
     @user = User.find(params[:id])
   end
 
