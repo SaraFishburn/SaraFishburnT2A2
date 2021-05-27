@@ -8,6 +8,14 @@
   display: flex;
   align-items: center;
 
+  .placeholder-profile-pic {
+    border: 1px solid var(--dark-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark-2);
+  }
+
   .pic-and-placeholder {
     height: 40px;
     width: 40px;

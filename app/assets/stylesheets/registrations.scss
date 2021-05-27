@@ -1,4 +1,29 @@
 
+ #logo-hero-image {
+   display: flex;
+   justify-content: center;
+
+   .logo-div {
+     margin: 30px;
+    background-color: black; 
+    width: 170px; 
+    height: 225px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+   }
+
+   .search-bar {
+     display: flex;
+
+    #address-form {
+      display: flex;
+    }
+   }
+
+ }
+ 
+ 
  .pic-name-printers {
   display: flex;
   align-items: center;
@@ -57,7 +82,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: scroll;
+    // overflow: scroll;
     width: inherit;
 
     .call-to-action-question {
@@ -168,30 +193,37 @@
 
 
 #registrations-show {
+  display: flex;
+  margin-top: 50px;
 
+  .printer-filament-card {
+    box-shadow: var(--dp4);
+  }
+
+  
   .star-rating {
     margin-bottom: 15px;
   }
-
+  
   .printer-filament-card {
     justify-content: center;
-
+    
     .printer-details {
-
+      
       div:nth-child(1), div:nth-child(2) {
         margin-right: 5px;
         display: inline-block;
       }
-
+      
       div:last-child {
         display: flex;
         justify-content: center;
       }
     }
   }
-
+  
   .message-button-placeholder {
-
+    
     background-color:grey;
     color: white;
     border-radius: 30px;
@@ -200,19 +232,19 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-
+    
     span {
       color: white;
       margin-left: 10px;
     }
-
+    
   }
-
-
+  
+  
   form {
     button {
       @extend .message-button-placeholder;
-  
+      
       background-color: blue;
       outline: none;
       border: none;
@@ -226,5 +258,30 @@
     }
   }
   
+  #filaments-reviews {
+    margin-left: 50px;
+
+    .filaments {
+      margin-bottom: 50px;
+    }
+
+    .review-button {
+      height: 40px;
+      border-radius: 40px;
+      padding: 10px 20px;
+      margin: 10px;
+      color: white;
+      background-color: blue;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .reviews {
+      margin-top: 10px;
+    }
+
+  }
 
 }

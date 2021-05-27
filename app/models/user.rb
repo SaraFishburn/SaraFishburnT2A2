@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_one_attached :profile_pic
 
   has_many :messages, dependent: :destroy
-  has_many :messages, dependent: :destroy
 
   has_and_belongs_to_many :printers
   has_and_belongs_to_many :filaments

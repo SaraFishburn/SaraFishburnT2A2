@@ -36,31 +36,33 @@
     </div>
   </div>
 
-  <%# display filaments the user owns %>
-  <div class="filaments">
-    <div class="printer-filament-list">
-        <h5> Filaments Available: </h5>
-        <% @user.filaments.each do |filament| %>
-          <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
-        <% end %>
+  <div id="filaments-reviews">
+    <%# display filaments the user owns %>
+    <div class="filaments">
+      <div class="printer-filament-list">
+          <h1> Filaments Available: </h1>
+          <% @user.filaments.each do |filament| %>
+            <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
+          <% end %>
+      </div>
     </div>
-  </div>
 
- 
-  <h2> Reviews: </h2>
+  
+    <h1> Reviews: </h1>
 
-  <%# prevent user from making more than one review for an owner %>
-  <% if current_user.reviews_made.where(user_id: @user).empty?  %>
-    <%= link_to "Write a review for #{@user.public_name}", new_user_review_path(@user) %>
-  <% else %>
-    <span> You have already reviewed this owner </span>
-  <% end %>
-
-  <%# display user reviews %>
-  <div class="reviews">
-    <% @user.reviews.each do |review| %>
-      <%= render partial: 'shared/review_card', locals: { review: review } %>
+    <%# prevent user from making more than one review for an owner %>
+    <% if current_user.reviews_made.where(user_id: @user).empty?  %>
+      <%= link_to "Write a review for #{@user.public_name}", new_user_review_path(@user), class: 'review-button' %>
+    <% else %>
+      <span> You have already reviewed this owner </span>
     <% end %>
+
+    <%# display user reviews %>
+    <div class="reviews">
+      <% @user.reviews.each do |review| %>
+        <%= render partial: 'shared/review_card', locals: { review: review } %>
+      <% end %>
+    </div>
   </div>
 
 

@@ -3,7 +3,6 @@
   <%# User profile iamge with notification bubble and dropdown %>
   <div class="profile-settings">
 
-    <%# Image with notification bubble %>
     <div class="user-image">
       <% if current_user_profile_pic.attached? %>
         <div class="profile-pic">
@@ -12,8 +11,6 @@
       <% else %>
         <div class="placeholder-profile-pic"><span class="material-icons"> tag_faces </span></div>
       <% end %>
-
-      <div class="notification-bubble"></div>
     </div>
 
     <%# Chevron to show dropdown state %>

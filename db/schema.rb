@@ -10,141 +10,141 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_092149) do
-
+ActiveRecord::Schema.define(version: 20_210_526_092_149) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  create_table 'active_storage_attachments', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'record_type', null: false
+    t.bigint 'record_id', null: false
+    t.bigint 'blob_id', null: false
+    t.datetime 'created_at', null: false
+    t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
+                                                    unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  create_table 'active_storage_blobs', force: :cascade do |t|
+    t.string 'key', null: false
+    t.string 'filename', null: false
+    t.string 'content_type'
+    t.text 'metadata'
+    t.string 'service_name', null: false
+    t.bigint 'byte_size', null: false
+    t.string 'checksum', null: false
+    t.datetime 'created_at', null: false
+    t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  create_table 'active_storage_variant_records', force: :cascade do |t|
+    t.bigint 'blob_id', null: false
+    t.string 'variation_digest', null: false
+    t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
-  create_table "chatrooms", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'chatrooms', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "chatrooms_users", id: false, force: :cascade do |t|
-    t.bigint "chatroom_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id", "chatroom_id"], name: "index_chatrooms_users_on_user_id_and_chatroom_id"
+  create_table 'chatrooms_users', id: false, force: :cascade do |t|
+    t.bigint 'chatroom_id', null: false
+    t.bigint 'user_id', null: false
+    t.index %w[user_id chatroom_id], name: 'index_chatrooms_users_on_user_id_and_chatroom_id'
   end
 
-  create_table "filaments", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "filament_brand"
-    t.string "filament_color"
-    t.string "filament_type", null: false
+  create_table 'filaments', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'filament_brand'
+    t.string 'filament_color'
+    t.string 'filament_type', null: false
   end
 
-  create_table "filaments_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "filament_id", null: false
-    t.index ["user_id", "filament_id"], name: "index_filaments_users_on_user_id_and_filament_id"
+  create_table 'filaments_users', id: false, force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'filament_id', null: false
+    t.index %w[user_id filament_id], name: 'index_filaments_users_on_user_id_and_filament_id'
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.bigint "chatroom_id", null: false
-    t.bigint "user_id", null: false
-    t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+  create_table 'messages', force: :cascade do |t|
+    t.bigint 'chatroom_id', null: false
+    t.bigint 'user_id', null: false
+    t.string 'content'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['chatroom_id'], name: 'index_messages_on_chatroom_id'
+    t.index ['user_id'], name: 'index_messages_on_user_id'
   end
 
-  create_table "printers", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "printer_brand"
-    t.string "printer_model"
-    t.string "printer_type", null: false
+  create_table 'printers', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'printer_brand'
+    t.string 'printer_model'
+    t.string 'printer_type', null: false
   end
 
-  create_table "printers_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "printer_id", null: false
-    t.index ["user_id", "printer_id"], name: "index_printers_users_on_user_id_and_printer_id"
+  create_table 'printers_users', id: false, force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'printer_id', null: false
+    t.index %w[user_id printer_id], name: 'index_printers_users_on_user_id_and_printer_id'
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "reviewer_id", null: false
-    t.string "content"
-    t.integer "rating"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+  create_table 'reviews', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'reviewer_id', null: false
+    t.string 'content'
+    t.integer 'rating'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['reviewer_id'], name: 'index_reviews_on_reviewer_id'
+    t.index ['user_id'], name: 'index_reviews_on_user_id'
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  create_table 'roles', force: :cascade do |t|
+    t.string 'name'
+    t.string 'resource_type'
+    t.bigint 'resource_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index %w[name resource_type resource_id], name: 'index_roles_on_name_and_resource_type_and_resource_id'
+    t.index %w[resource_type resource_id], name: 'index_roles_on_resource'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "nickname"
-    t.decimal "latitude"
-    t.decimal "longitude"
-    t.string "address"
-    t.string "suburb_and_postcode"
-    t.decimal "rating"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'nickname'
+    t.decimal 'latitude'
+    t.decimal 'longitude'
+    t.string 'address'
+    t.string 'suburb_and_postcode'
+    t.decimal 'rating'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "role_id"
-    t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  create_table 'users_roles', id: false, force: :cascade do |t|
+    t.bigint 'user_id'
+    t.bigint 'role_id'
+    t.index ['role_id'], name: 'index_users_roles_on_role_id'
+    t.index %w[user_id role_id], name: 'index_users_roles_on_user_id_and_role_id'
+    t.index ['user_id'], name: 'index_users_roles_on_user_id'
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "messages", "chatrooms"
-  add_foreign_key "messages", "users"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "reviews", "users", column: "reviewer_id"
+  add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'messages', 'chatrooms'
+  add_foreign_key 'messages', 'users'
+  add_foreign_key 'reviews', 'users'
+  add_foreign_key 'reviews', 'users', column: 'reviewer_id'
 end

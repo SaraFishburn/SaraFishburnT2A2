@@ -1,12 +1,17 @@
 <%# logo and hero image %>
-<%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621583328/hero_image_xqfmbm.png", crop: :scale, width: 1080, cloud_name: 'sazza', style: "width: 100vw; position: absolute; z-index: -100;" %>
-<div style="background-color: black; width: 220px; height: 300px; display: flex; justify-content: center; align-items: center;">
-  <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621586175/print3d_logo_white_erl3fm.svg", crop: :scale, width: 200, cloud_name: 'sazza' %>
+<div id="logo-hero-image">
+  <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621583328/hero_image_xqfmbm.png", crop: :scale, width: 1080, cloud_name: 'sazza', style: "width: 100vw; position: absolute; z-index: -100;" %>
+  <div class="logo-div">
+    <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621586175/print3d_logo_white_erl3fm.svg", crop: :scale, width: 150, cloud_name: 'sazza' %>
+  </div>
 </div>
 
 <%# if the user is logged in, show the address search bar otherwise provide a call to action that links to the sign up page %>
 <% if current_user %>
-  <%= render partial: 'shared/address_search', locals: { default_address: params[:address] } %>
+
+  <div class="search-bar">
+    <%= render partial: 'shared/address_search', locals: { default_address: params[:address] } %>
+  </div>
 
   <div class="search-results">
     <% @nearby_owners.each do |owner| %>
