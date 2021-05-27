@@ -66,3 +66,5 @@ gem "rolify", "~> 6.0"
 gem "cloudinary", "~> 1.20"
 
 gem "activestorage-cloudinary-service", "~> 0.2.3"
+
+gem "redis", "~> 4.2"
