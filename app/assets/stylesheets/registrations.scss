@@ -174,18 +174,9 @@
   }
 
   .printer-filament-card {
-    box-shadow: var(--dp4);
     justify-content: center;
 
-    &:hover {
-      box-shadow: var(--dp8);
-    }
-
     .printer-details {
-
-      div {
-        cursor: pointer;
-      }
 
       div:nth-child(1), div:nth-child(2) {
         margin-right: 5px;

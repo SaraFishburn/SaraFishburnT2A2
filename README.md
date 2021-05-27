@@ -4,11 +4,9 @@
 https://print3d-society.herokuapp.com/
 
 ## Github repo
-
 https://github.com/SaraFishburn/SaraFishburnT2A2
 
 ## Trello board
-
 https://trello.com/b/I01qMktP
 
 ## ERD
