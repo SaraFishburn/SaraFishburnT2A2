@@ -1,19 +1,16 @@
 class ReviewsController < ApplicationController
   def create
-    return redirect_to users_show_path(params[:user_id]) unless current_user.reviews_made.where(user_id: params[:user_id]).empty?
+    # unless the user hasnt reviewed the owner before, redirect to the owner's profile
+    unless current_user.reviews_made.where(user_id: params[:user_id]).empty?
+      return redirect_to users_show_path(params[:user_id])
+    end
 
     current_user.reviews_made.create(review_params)
     redirect_to users_show_path(params[:user_id])
   end
 
+  # nescessary for the 'new' view to work
   def new; end
-
-  def destroy
-    review = Review.find(params[:id])
-    return unless review.reviewer == current_user
-
-    review.destroy
-  end
 
   private
 

@@ -1,5 +1,5 @@
+<%# partial to hopefully be made a modal in future %>
 <div>
-  <span class="material-icons"> close </span>
   <%= form_with url: printers_path, method: :post do |f| %>
     <h4> Add a printer </h4>
 
@@ -9,14 +9,13 @@
     <%= f.label :printer_model%>
     <%= f.text_field :printer_model %>
 
+    <%# create radio buttons for printer types to keep database input neat %>
     <%= f.label :printer_type %>
     <% printer_types.each do |p| %>
       <%= f.radio_button :printer_type, p %>
       <%= f.label :printer_type, p %>
     <% end %>
     <small>*Unfortunately, Print3d Society currently only supports FDM and SLA printers</small>
-
-    <%= f.hidden_field value: user.id %>
 
     <%= f.submit "Add"%>
   <% end %>

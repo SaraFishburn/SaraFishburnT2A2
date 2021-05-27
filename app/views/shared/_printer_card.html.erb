@@ -1,3 +1,4 @@
+<%# card to display printer details on registrations show page and registrations edit page %>
 <div class="printer-filament-card">
   <span class='printer-details'>
     <div><%= printer.printer_brand %></div>
@@ -5,6 +6,8 @@
     <div><%="(#{printer.printer_type})"%></div>
   </span>
   <span>
+
+  <%# if on the registrations edit page, add a delete button to the printer card %>
   <% if controller.controller_name == 'registrations' && controller.action_name == 'edit' %>
     <%= button_to printer_path(printer), method: :delete, class: "delete-button btn" do %>
       <span class="material-icons">delete</span>

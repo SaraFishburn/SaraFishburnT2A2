@@ -1,8 +1,10 @@
-
+<%# cards that display the chatroom details for the list of chatrooms on the chatrooms show page %>
 <div class="chatroom-card">
   <%= render partial: 'shared/profile_pic', locals: { user: other_user } %>
   <span>
     <p> <%= other_user.public_name %></p>
+
+    <%# only attempt to add printer details if the user is an owner %>
     <% if other_user.has_role? :owner %>
       <p> <%= "#{other_user.printers.first.printer_brand} #{other_user.printers.first.printer_model}" %></p>
     <% end %>

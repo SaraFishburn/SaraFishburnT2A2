@@ -1,3 +1,4 @@
+<%# shows user profile. only owners have profiles %>
 <div id="registrations-show">
 
   <div class="pic-name-printers">
@@ -5,14 +6,17 @@
 
     <h1><%= @user.public_name %></h1>
     <h6><%= @user.suburb_and_postcode %></h6>
+
     <%= render partial: 'shared/star_rating', locals: { average_rating: @user.average_rating, reviews: @user.reviews } %>
 
+    <%# message button that triggers the creation of a chatroom with user and redirects to new chatroom %>
+    <%# if a user is looking at their own profile, render a greyed out placeholder div in place of a button to prevent users creating chatrooms with themselves %>
     <% if @user == current_user %>
-      <div class="message-button">
+      <div class="message-button-placeholder">
         <%= "Chat with #{@user.public_name}" %> <span class="material-icons">sms</span>
       </div>
     <% else %>
-      <%= form_with url: chatrooms_path, method: :post, class: "message-button" do |f| %>
+      <%= form_with url: chatrooms_path, method: :post do |f| %>
         <%= f.hidden_field :user1, value: @user.id %>
         <%= f.hidden_field :user2, value: current_user.id %>
         <%= button_tag type: "submit" do %>
@@ -21,32 +25,40 @@
       <% end %>
     <% end %>
 
+    <%# display printers the user owns %>
     <div class="printers-filaments-div">
       <div class="printer-filament-list">
-        <h5> Select a Printer: </h5>
+        <h5> Printers: </h5>
         <% @user.printers.each do |printer| %>
           <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
         <% end %>
       </div>
-
-      <%= button_tag class: "btn add-button" do %>
-        <span class="material-icons">add</span>
-      <% end %>
     </div>
   </div>
 
+  <%# display filaments the user owns %>
   <div class="filaments">
     <div class="printer-filament-list">
         <h5> Filaments Available: </h5>
-        <% current_user.filaments.each do |filament| %>
+        <% @user.filaments.each do |filament| %>
           <%= render partial: 'shared/filament_card', locals: { filament: filament } %>
         <% end %>
     </div>
   </div>
 
+ 
+  <h2> Reviews: </h2>
+
+  <%# prevent user from making more than one review for an owner %>
+  <% if current_user.reviews_made.where(user_id: @user).empty?  %>
+    <%= link_to "Write a review for #{@user.public_name}", new_user_review_path(@user) %>
+  <% else %>
+    <span> You have already reviewed this owner </span>
+  <% end %>
+
+  <%# display user reviews %>
   <div class="reviews">
-    <h5> Reviews: </h5>
-    <% current_user.reviews.each do |review| %>
+    <% @user.reviews.each do |review| %>
       <%= render partial: 'shared/review_card', locals: { review: review } %>
     <% end %>
   </div>

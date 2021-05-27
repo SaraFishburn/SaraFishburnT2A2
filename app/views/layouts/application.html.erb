@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Src</title>
+    <title>Print3D</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 
-    <%# google autofill stuff %>
+    <%# google autofill %>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -29,6 +29,7 @@
 
   <body>
     <nav>
+      <%# display logo stored in cloudinary  %>
       <div class="logo">
         <%= link_to users_path do %>
           <%= cl_image_tag "https://res.cloudinary.com/sazza/image/upload/v1621581516/print3d_logo_n7yjae.svg", crop: :scale, height: 70, cloud_name: 'sazza' %>
@@ -36,7 +37,10 @@
         <% end %>
       </div>
 
+      <%# navbar links %>
       <% if user_signed_in? %>
+
+        <%# display a search bar in the nav unless on the index page (which has a search bar on it) %>
         <% unless controller.controller_name == 'registrations' && controller.action_name == 'index' %>
           <%= render partial: 'shared/address_search', locals: { default_address: '' } %>
         <% end %>
@@ -49,6 +53,7 @@
     </nav>
     <%= yield %>
 
+    <%# script tag required to be posiotioned after search bars for google API to work %>
     <script 
       src=<%="https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_PLACES_API_KEY"]}&callback=initAutocomplete&libraries=places&v=weekly"%>
       async >

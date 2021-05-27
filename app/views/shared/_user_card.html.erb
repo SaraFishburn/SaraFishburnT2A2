@@ -1,3 +1,4 @@
+<%# card to display user details %>
 <div class="user-card">
     <span class="pic-name-printer">
       <span>
@@ -6,6 +7,7 @@
       <span>
         <p> <%= user.public_name %></p>
 
+        <%# if the user is an owner, display their printer, star rating, and location details %>
         <% if user.has_role? :owner %>
 
               <p> <%= "#{user.printers.first.printer_brand} #{user.printers.first.printer_model} (#{user.printers.first.printer_type})" %></p>

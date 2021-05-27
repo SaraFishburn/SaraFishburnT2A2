@@ -1,8 +1,10 @@
+<%# google api geocode script stored in a script tag so environment variables (API key) are easily accessible via .erb tags %>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const user_address_element = document.getElementById("user_address")
     const address_element = document.getElementById("address")
 
+    // when the search bar address is changed, update the latitude and longitude form fields and submit form
     address_element && address_element.addEventListener('place_changed', function(e) {
       document.getElementById('latitude').value = e.detail.geometry.location.lat()
       document.getElementById('longitude').value = e.detail.geometry.location.lng()
@@ -10,7 +12,8 @@
       document.getElementById("address-form").submit()
     })
 
-    user_address_element && user_address_element.addEventListener('place_changed', function() {
+    // when user address is changed, update the latitude, longitude, and suburb and postcode form fields 
+    user_address_element && user_address_element.addEventListener('place_changed', function(e) {
       const suburb = (e.detail.address_components.find(element => element.types.includes('locality'))).long_name
       const postcode = (e.detail.address_components.find(element => element.types.includes('postal_code'))).long_name
 

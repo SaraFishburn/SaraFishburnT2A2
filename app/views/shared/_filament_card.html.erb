@@ -1,3 +1,4 @@
+<%# card to display filament details on registrations show page and registrations edit page %>
 <div class="printer-filament-card">
   <span class='filament-details'>
     <span>
@@ -8,6 +9,7 @@
       <div><%= filament.filament_color %></div>
     </span>
 
+  <%# if on the registrations edit page, add a delete button to the filament card %>
   </span>
   <% if controller.controller_name == 'registrations' && controller.action_name == 'edit' %>
     <span>

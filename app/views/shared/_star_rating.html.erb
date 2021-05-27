@@ -1,8 +1,12 @@
+<%# displays 5 stars to screen filled yellow given the rating of the user %>
 <span class="star-rating">
+
+  <%# for each full star, add 'full-star' class to be styled to be orange %>
   <% (average_rating.to_i).times do |i| %>
     <span class="material-icons full-star">star</span>
   <% end %>
 
+  <%# for the fraction of a star, overlap a grey star with an orange star and only show the amount of ornage star equal to the fraction %>
   <% unless (average_rating % 1).zero? %>
     <span class="fraction-star">
       <div class="material-icons base-star">star</div>
@@ -12,10 +16,12 @@
     </span>
   <% end %>
 
+  <%# calculate the remaining stars and display as grey %>
   <% (5 - average_rating.ceil).times do |i| %>
     <span class="material-icons grey-star">star</span>
   <% end %>
 
+  <%# display the number of review a user has %>
   <% unless reviews.nil? %>
     <div class="num-reviews">
       <%= reviews.count %>

@@ -1,3 +1,4 @@
+<%# display profile pic or a placeholder image if one does not exist %>
 <% if user.profile_pic.attached? %>
   <div class="profile-pic pic-and-placeholder">
     <%= cl_image_tag user.profile_pic.key, crop: :scale, width: 200, cloud_name: 'sazza'%>

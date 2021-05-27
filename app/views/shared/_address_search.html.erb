@@ -1,33 +1,46 @@
 <%= javascript_pack_tag 'autofill' %>
+
+<%# geocode javascript added as a script tag in a partial for ease of access to environment variables thorugh .erb tags %>
 <%= render 'shared/geocode' %>
 
+<%# form to be handled by javascript to search for addresses %>
 <%= form_with url: '/users', method: :get, html: { id: 'address-form' } do |f|%>
   <div class="input-group mb-3">
 
-    <%= f.label :printer_type %>
-    <%= f.radio_button :printer_type, printer_types.join(","), checked: params[:printer_type] == printer_types.join(",") %>
+    <%# include filter options if the search bar is on the index page (prevents navbar from having ugly filter options) %>
+    <% if controller.controller_name == 'registrations' && controller.action_name == 'index' %>
+      <%= f.label :printer_type %>
+
+      <%# radio button to select all printer types and is 'checked' value based on params %>
+      <%= f.radio_button :printer_type, printer_types.join(","), checked: params[:printer_type].nil? || params[:printer_type] == printer_types.join(",") %>
       <%= f.label :all %>
-    <% printer_types.each do |p| %>
-      <%= f.radio_button :printer_type, p, checked: params[:printer_type] == p %>
-      <%= f.label p, style: "text-transform: uppercase;" %>
+
+      <%# display radio buttons for each type of printer %>
+      <% printer_types.each do |p| %>
+        <%= f.radio_button :printer_type, p, checked: params[:printer_type] == p %>
+        <%= f.label p, style: "text-transform: uppercase;" %>
+      <% end %>
+
+      <%# display a distance slider for user to filter location range of their search %>
+      <%= f.label :distance %>
+      <%= f.range_field :distance, value: params[:distance] || 50, min: 0, max: 100, list: 'tickmarks' %>
+      <datalist id="tickmarks">
+        <option value="10" label="10km"></option>
+        <option value="20"></option>
+        <option value="30"></option>
+        <option value="40"></option>
+        <option value="50" label="50km"></option>
+        <option value="60"></option>
+        <option value="70"></option>
+        <option value="80"></option>
+        <option value="90"></option>
+        <option value="100" label="100km"></option>
+      </datalist>
     <% end %>
 
-    <%= f.label :distance %>
-    <%= f.range_field :distance, value: params[:distance] || 50, min: 0, max: 100, list: 'tickmarks' %>
-    <datalist id="tickmarks">
-      <option value="10" label="10km"></option>
-      <option value="20"></option>
-      <option value="30"></option>
-      <option value="40"></option>
-      <option value="50" label="50km"></option>
-      <option value="60"></option>
-      <option value="70"></option>
-      <option value="80"></option>
-      <option value="90"></option>
-      <option value="100" label="100km"></option>
-    </datalist>
-
     <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
+
+    <%# longitude and latitude hidden fields to be filled via javascript and passed to the backend on form submit %>
     <%= f.hidden_field :longitude, value: params[:longitude] %>
     <%= f.hidden_field :latitude, value: params[:latitude] %>
 

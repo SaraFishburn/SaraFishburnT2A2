@@ -1,38 +1,41 @@
 <%= javascript_pack_tag 'registrations_edit' %>
 
+<%# page navigated to via the 'account' menu item in the profile dropdown %>
 <div class="registrations-edit">
   <div class="pic-name-printers">
+    <div class="pic-and-edit-container">
+      <%= render partial: 'shared/profile_pic', locals: { user: current_user } %>
 
-  <div class="pic-and-edit-container">
-    <%= render partial: 'shared/profile_pic', locals: { user: current_user } %>
+      <%# form for editing the profile pic, javascript handles automatic submission upon choosing a picture %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "profile-pic-edit", method: :put }) do |f| %>
+        <div>
+          <%= f.file_field :profile_pic %>
+          <%= f.submit name: "profile_pic_submit"%>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "profile-pic-edit", method: :put }) do |f| %>
-      <div>
-        <%= f.file_field :profile_pic %>
-        <%= f.submit name: "profile_pic_submit"%>
-        <span id="edit-profile-pic-icon" class="material-icons">edit</span>
-      </div>
-    <% end %>
-  </div>
+          <%# span with edit icon overlaps file field and submit buttons, javascript links span to file field button %>
+          <span id="edit-profile-pic-icon" class="material-icons">edit</span>
+        </div>
+      <% end %>
+    </div>
 
-    <% if current_user.nickname %>
-      <h1>
-        <%= current_user.nickname %>
-      </h1>
-    <% else %>
-      <h1>
-          <%= current_user.first_name %>
-      </h1>
-    <% end %>
+    <h1>
+      <%= current_user.public_name %>
+    </h1>
+
 
     <div class="printers-filaments-div">
       <div class="printer-filament-list">
+
+        <%# if user isnt an owner, display a call to action to become an owner %>
         <% if !(current_user.has_role? :owner)%>
           <p class="call-to-action-question">
             Do you own a 3d printer?
           </p>
+          <%# when clicked, javascript displays the address field in the user form %>
           <%= button_tag "Start printing and selling now", type: "button", class: "btn btn-primary print-sell-button", id: 'owner_button' %>
         <% else %>
+
+          <%# display user's printers %>
           <h5> Printers: </h5>
           <% current_user.printers.each do |printer| %>
             <%= render partial: 'shared/printer_card', locals: { printer: printer } %>
@@ -40,14 +43,17 @@
         <% end %>
       </div>
 
+      <%# if user is an owner, display an add button so user can add a printer to their profile %>
       <% if (current_user.has_role? :owner)%>
         <%= button_to new_printer_path, class: "btn add-button", method: :get do %>
           <span class="material-icons">add</span>
         <% end %>
       <% end %>
     </div>
+
   </div>
 
+  <%# main user details form %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
@@ -59,6 +65,8 @@
             Maker
           <% end %>
         Account</h2>
+
+        <%# devise user details fields %>
 
         <div class="field">
           <%= f.label :first_name %><br />
@@ -76,7 +84,7 @@
         </div>
 
         <div class="field">
-          <%= f.label :nickname %><br />
+          <%= f.label :nickname %><i>(your public name will be your first name if no nickname)</i><br />
           <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
         </div>
 
@@ -84,11 +92,9 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
+        <%# address field hidden unles suser is an owner or javascript displays %>
         <div id="account-address-field" style="display: <%= current_user.has_role?(:owner) ? '' : 'none' %>">
           <%= render partial: 'shared/address_field', locals: { form: f, default_address: current_user.address } %>
-          <%= f.hidden_field :latitude %>
-          <%= f.hidden_field :longitude %>
-          <%= f.hidden_field :suburb_and_postcode %>
         </div>
 
         <div class="actions">
@@ -96,6 +102,8 @@
         </div>
 
         <h2> Update Password </h2>
+
+        <%# devise passowrd update fields %>
 
         <div class="field">
           <%= f.label :password %> <br />
@@ -125,6 +133,7 @@
       <p><%= link_to "Cancel Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
     </div>
 
+    <%# if the user is an owner, display their filaments with buttons to add and delete filaments %>
     <% if (current_user.has_role? :owner)%>
       <div class="printers-filaments-div filaments">
           <div class="printer-filament-list">

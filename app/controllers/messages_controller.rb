@@ -1,28 +1,18 @@
 class MessagesController < ApplicationController
 
-  def show
-    chatroom = Chatroom.find(params[:chatroom_id])
-    return redirect_to root_path unless chatroom&.users&.include?(current_user)
-  end
-
-  def new
-    @message = Message.new
-  end
-
   def create
     chatroom = Chatroom.find(params[:chatroom_id])
-    return if message_params[:content].empty? || !chatroom.users.include?(current_user)
 
-    @message = Message.new(message_params)
-    @message.user = current_user
-    @message.save
+    # if user attempts to post an empty message or to a chatroom they aren't a member of, redirect to root_path
+    return if message_params[:content].empty? || !chatroom&.users&.include?(current_user)
+
+    @message = current_user.messages.create(message_params)
+
+    # update the chatroom to keep track of most active chatrooms and assist with chatroom list ordering
     chatroom.update(updated_at: Time.now)
 
+    # when a message is created, call on the send message job to broadcast the message to the chatroom
     SendMessageJob.perform_later(@message)
-  end
-
-  def update
-    # placeholder
   end
 
   private

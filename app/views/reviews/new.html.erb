@@ -1,6 +1,10 @@
-
+<%# form for user to create a review %>
 <%= form_with url: user_reviews_path(params[:user_id]), method: :post do |f| %>
-  <%= f.text_field :content %>
+
+  <%= f.label :rating, "Star Rating" %>
   <%= f.number_field :rating, max: 5, min: 0, step: 1 %>
+
+  <%= f.label :content, "Feedback" %>
+  <%= f.text_field :content %>
   <%= f.submit :Send %>
 <% end %>

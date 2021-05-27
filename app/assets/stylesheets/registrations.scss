@@ -198,6 +198,42 @@
       }
     }
   }
+
+  .message-button-placeholder {
+
+    background-color:grey;
+    color: white;
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    span {
+      color: white;
+      margin-left: 10px;
+    }
+
+  }
+
+
+  form {
+    button {
+      @extend .message-button-placeholder;
+  
+      background-color: blue;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--dp4);
+
+      &:hover {
+        transform: scale(1.02);
+      }
+      
+    }
+  }
   
 
 }

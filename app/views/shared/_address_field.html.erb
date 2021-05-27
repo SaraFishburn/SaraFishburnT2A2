@@ -1,9 +1,17 @@
 <%= javascript_pack_tag 'autofill' %>
+
+<%# geocode javascript added as a script tag in a partial for ease of access to environment variables thorugh .erb tags %>
 <%= render 'shared/geocode' %>
 
+  <%# form with appropriate class and id names to be handled by javascript %>
   <div class="field">
     <%= form.label :address %><br />
     <%= form.text_field :address, autofocus: true, autocomplete: "address", value: default_address, class: "google-autofill" %>
+
+    <%# javascript finds longitude, latitude, and suburb and postcode to save in user record %>
+    <%= form.hidden_field :latitude %>
+    <%= form.hidden_field :longitude %>
+    <%= form.hidden_field :suburb_and_postcode %>
   </div>
 
   <script>

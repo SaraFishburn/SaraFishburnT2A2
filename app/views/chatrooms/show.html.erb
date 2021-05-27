@@ -1,27 +1,38 @@
 <%= javascript_pack_tag 'chatrooms_show' %>
 
 <div id="chatrooms-show">
+
+  <%# render each of a user's chatrooms on the side of the page for easy navigation %>
   <div class="chatroom-list">
     <% @chatrooms.each do |chatroom| %>
-      <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
+      <%= link_to chatroom_path(chatroom) do %>
+        <%= render partial: 'shared/chatroom_card', locals: { other_user: chatroom.other_user(current_user) } %>
+      <% end %>
     <% end %>
   </div>
 
+  <%# render user details of other user in currently open chat %>
   <div class="chatroom">
     <div class="chatroom-header">
       <%= render partial: 'shared/user_card', locals: { user: @other_user } %>
     </div>
+
+    <%# display messages from chat on screen %>
     <div id="chatroom-body">
       <% @chatroom.messages.reverse.each do |message| %>
+        <%# apply class 'self' or 'other' depending on who created the message to apply correct styling %>
         <div class="<%= message.user == current_user ? 'self' : 'other' %> message-bubble">
+          <%# message stored in a partial so the send message job can render %>
           <%= render partial: 'shared/message', locals: { message: message } %>
         </div>
       <% end %>
 
-      <%# for some reason my top message won't move down without the following buffer div :(  %>
+      <%# for some reason my top message won't move down without the following buffer div :( %>
       <div class="message-bubble"></div>
 
     </div>
+
+    <%# provide form so user may create a message %>
     <div class="chatroom-message-input">
       <%= form_with url: chatroom_messages_path(@chatroom), method: :post, html: { autocomplete: :off }, id: "message-input" do |f| %>
         <%= f.text_field :content, Placeholder: "Aa", class: "text-field" %>
@@ -31,4 +42,5 @@
   </div>
 </div>
 
+<%# hidden input user id for javascript to access %>
 <input type="hidden" id="user_id" value=<%= current_user.id %>>
