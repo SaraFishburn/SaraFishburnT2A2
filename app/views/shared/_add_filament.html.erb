@@ -1,25 +1,38 @@
 <%# partial to hopefully be made a modal in future %>
-<div>
+<div id="filaments-new">
   <%= form_with url: filaments_path, method: :post do |f| %>
-    <h4> Add a filament or resin </h4>
+    <p> Add a filament or resin </p>
 
-    <%= f.label :filament_brand%>
+    <%= f.label :filament_brand, "Filament Brand:" %>
     <%= f.text_field :filament_brand %>
 
     <%# create radio buttons for different filament colors to keep database input neat %>
-    <%= f.label :filament_color %>
-    <% @filament_colors.each do |p| %>
-      <%= f.radio_button :filament_color, p %>
-      <%= f.label :filament_color, p %>
-    <% end %>
+    <%= f.label :filament_color, "Filament Color:"%>
+
+    <div id="filament-color-radio-buttons">
+      <% @filament_colors.each do |p| %>
+        <div>
+          <%= f.radio_button :filament_color, p %>
+          <%= f.label :filament_color, p %>
+        </div>
+      <% end %>
+    </div>
 
     <%# create radio buttons for filament types to keep database input neat %>
-    <%= f.label :filament_type %>
-    <% @filament_types.each do |p| %>
-      <%= f.radio_button :filament_type, p %>
-      <%= f.label :filament_type, p %>
-    <% end %>
+    <%= f.label :filament_type, "Filament Type:" %>
 
-    <%= f.submit "Add"%>
+    <div id="filament-type-radio-buttons">
+      <% @filament_types.each do |p| %>
+        <div>
+          <%= f.radio_button :filament_type, p %>
+          <%= f.label :filament_type, p %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="back-add">
+      <%= link_to "Back", :back, id: "back" %> 
+      <%= f.submit "Add", id: "submit_button" %>
+    </div>
   <% end %>
 </div>

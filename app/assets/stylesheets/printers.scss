@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#printer-new {
+#printer-new, #filaments-new{
   width: 100%;
   height: calc(100vh - 80px);
   display: flex;
@@ -23,7 +23,7 @@
       font-size: 2rem;
     }
 
-    #printer_brand, #printer_model {
+    #printer_brand, #printer_model, #filament_brand {
       height: 45px;
       box-shadow: var(--dp4);
       border: none;
