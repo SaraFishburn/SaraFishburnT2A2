@@ -46,9 +46,11 @@
         <% end %>
         <%= render 'shared/profile_dropdown' %>
       <% else %>
-        <%= link_to "Login", new_user_session_path %>
-        |
-        <%= link_to "Sign Up", new_user_registration_path %>
+        <span class="login-signup">
+          <%= link_to "Login", new_user_session_path %>
+          |
+          <%= link_to "Sign Up", new_user_registration_path %>
+        </span>
       <% end %>
     </nav>
     <%= yield %>

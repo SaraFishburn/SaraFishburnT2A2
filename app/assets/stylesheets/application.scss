@@ -85,6 +85,20 @@ body {
 
     }
 
+    .login-signup {
+      margin-right: 20px;
+
+      a {
+        color: black;
+        padding: 0px 10px;
+        font-size: 1.2rem;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
     .mb-3 {
       margin: 0 !important;
     }
@@ -92,39 +106,53 @@ body {
     .input-group {
       width: 350px;
 
-      .form-control {
-        height: var(--search-bar-height);
-        border-radius: var(--search-bar-height);
-        padding-left: 20px;
-        border-right: none;
+      #search {
+        @extend .input-group;
+        display: flex;
+        position: relative;
 
-        &:hover, &:focus, &:active {
-          border-color: var(--dark-1);
-          box-shadow: none;
-        }
-      }
-
-      .input-group-append {
-        button {
+        .form-control {
           height: var(--search-bar-height);
-          border-top-right-radius: var(--search-bar-height);
-          border-bottom-right-radius: var(--search-bar-height);
-          border-left: none;
-          color: var(--dark-2);
-          border-color: var(--dark-1);
-          display: flex;
-          align-items: center;
-        }
-
-        .btn-outline-secondary {
+          border-radius: var(--search-bar-height);
+          padding-left: 20px;
+          border-right: none;
+  
           &:hover, &:focus, &:active {
-            background-color: white;
             border-color: var(--dark-1);
-            color: var(--dark-4);
-            box-shadow: none !important;
+            box-shadow: none;
+          }
+        }
+  
+        .input-group-append {
+          position: absolute;
+          right: 0;
+
+          button {
+            height: var(--search-bar-height);
+            border-top-right-radius: var(--search-bar-height);
+            border-bottom-right-radius: var(--search-bar-height);
+            border-left: none;
+            color: var(--dark-2);
+            border-color: var(--dark-1);
+            display: flex;
+            align-items: center;
+
+            .material-icons {
+              color: var(--dark-3);
+            }
+          }
+  
+          .btn-outline-secondary {
+            &:hover, &:focus, &:active {
+              background-color: white;
+              border-color: var(--dark-1);
+              color: var(--dark-4);
+              box-shadow: none !important;
+            }
           }
         }
       }
+
     }
 
     .user-menu {

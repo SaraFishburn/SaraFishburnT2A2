@@ -23,5 +23,10 @@
     <% end %>
   </div>
 <% else %>
-  <%= link_to 'Join The Community Now', new_user_registration_path %>
+  <div class="landing-text">
+    <p class="society-text">3D Printing Society</p>
+    <p class="connect-text">Connect with 3D printers in your community</p>
+
+    <%= link_to 'Join The Community Now', new_user_registration_path, class: "join-community-button" %>
+  </div>
 <% end %>

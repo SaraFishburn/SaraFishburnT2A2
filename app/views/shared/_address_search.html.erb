@@ -5,49 +5,67 @@
 
 <%# form to be handled by javascript to search for addresses %>
 <%= form_with url: '/users', method: :get, html: { id: 'address-form' } do |f|%>
-  <div class="input-group mb-3">
+  <div class="input-group mb-3 search-and-filter">
+
+    <div id="search">
+      <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
+
+      <%# longitude and latitude hidden fields to be filled via javascript and passed to the backend on form submit %>
+      <%= f.hidden_field :longitude, value: params[:longitude] %>
+      <%= f.hidden_field :latitude, value: params[:latitude] %>
+
+      <div class="input-group-append">
+        <%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
+          <% if controller.controller_name == 'registrations' && controller.action_name == 'index' %>
+            Find Now
+          <% else %>
+            <span class="material-icons">search</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
 
     <%# include filter options if the search bar is on the index page (prevents navbar from having ugly filter options) %>
     <% if controller.controller_name == 'registrations' && controller.action_name == 'index' %>
-      <%= f.label :printer_type %>
+      <div id="filters">
+        <span id="printer-type">
+          <%= f.label :printer_type, "Printer Type:", class: "filter-label" %>
 
-      <%# radio button to select all printer types and is 'checked' value based on params %>
-      <%= f.radio_button :printer_type, printer_types.join(","), checked: params[:printer_type].nil? || params[:printer_type] == printer_types.join(",") %>
-      <%= f.label :all %>
+          <%# radio button to select all printer types and is 'checked' value based on params %>
+          <%= f.radio_button :printer_type, printer_types.join(","), checked: params[:printer_type].nil? || params[:printer_type] == printer_types.join(",") %>
+          <%= f.label :all, style: "margin-right: 10px;" %>
 
-      <%# display radio buttons for each type of printer %>
-      <% printer_types.each do |p| %>
-        <%= f.radio_button :printer_type, p, checked: params[:printer_type] == p %>
-        <%= f.label p, style: "text-transform: uppercase;" %>
-      <% end %>
+          <%# display radio buttons for each type of printer %>
+          <% printer_types.each do |p| %>
+            <%= f.radio_button :printer_type, p, checked: params[:printer_type] == p %>
+            <%= f.label p, style: "text-transform: uppercase; margin-right: 10px;" %>
+          <% end %>
+        </span>
 
-      <%# display a distance slider for user to filter location range of their search %>
-      <%= f.label :distance %>
-      <%= f.range_field :distance, value: params[:distance] || 50, min: 0, max: 100, list: 'tickmarks' %>
-      <datalist id="tickmarks">
-        <option value="10" label="10km"></option>
-        <option value="20"></option>
-        <option value="30"></option>
-        <option value="40"></option>
-        <option value="50" label="50km"></option>
-        <option value="60"></option>
-        <option value="70"></option>
-        <option value="80"></option>
-        <option value="90"></option>
-        <option value="100" label="100km"></option>
-      </datalist>
+        <span id="distance">
+          <%# display a distance slider for user to filter location range of their search %>
+          <%= f.label :distance, "Distance:", class: "filter-label" %>
+          <div id="slider">
+            <small>10km</small>
+            <%= f.range_field :distance, value: params[:distance] || 50, min: 0, max: 100, list: 'tickmarks' %>
+            <small>100km</small>
+          </div>
+          <datalist id="tickmarks">
+            <option value="10" label="10km"></option>
+            <option value="20"></option>
+            <option value="30"></option>
+            <option value="40"></option>
+            <option value="50" label="50km"></option>
+            <option value="60"></option>
+            <option value="70"></option>
+            <option value="80"></option>
+            <option value="90"></option>
+            <option value="100" label="100km"></option>
+          </datalist>
+        </span>
+
+      </div>
     <% end %>
-
-    <%= f.text_field :address, class: "form-control google-autofill", value: default_address, placeholder: "Search by postcode or address", aria: { label:"Address search" }%>
-
-    <%# longitude and latitude hidden fields to be filled via javascript and passed to the backend on form submit %>
-    <%= f.hidden_field :longitude, value: params[:longitude] %>
-    <%= f.hidden_field :latitude, value: params[:latitude] %>
-
-    <div class="input-group-append">
-      <%= button_tag type: 'submit', class: "btn btn-outline-secondary" do %>
-        <span class="material-icons">search</span>
-      <% end %>
-    </div>
   </div>
 <% end %>

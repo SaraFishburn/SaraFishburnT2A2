@@ -1,3 +1,90 @@
 // Place all the styles related to the printers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#printer-new {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+
+  form {
+    width: 600px;
+    background-color: var(--light-1);
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 50px;
+    box-shadow: var(--dp4);
+
+    p {
+      font-size: 2rem;
+    }
+
+    #printer_brand, #printer_model {
+      height: 45px;
+      box-shadow: var(--dp4);
+      border: none;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      padding: 0px 20px;
+
+      &:active, &:focus {
+        outline: none;
+      }
+    }
+
+    #printer-type-radio-buttons {
+      display: flex;
+
+      input {
+        height: 24px;
+        margin-right: 5px;
+      }
+
+      label {
+        margin-right: 10px;
+      }
+    }
+
+    small {
+      color: orange;
+    }
+
+    #back-add {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      #back {
+        margin-right: 20px;
+        padding-top: 20px;
+      }
+
+      #submit_button {
+        width: fit-content;
+        height: 45px;
+        padding: 0px 20px;
+        color: white;
+        background-color: blue;
+        border: none;
+        border-radius: 45px;
+        margin-top: 20px;
+        box-shadow: var(--dp4);
+        cursor: pointer;
+  
+        &:active, &:focus {
+          outline: none;
+        }
+  
+        &:hover {
+          box-shadow: var(--dp8);
+          transform: scale(1.02);
+        }
+      }
+
+    }
+  }
+}

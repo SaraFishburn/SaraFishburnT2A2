@@ -1,23 +1,28 @@
 <%# partial to hopefully be made a modal in future %>
-<div>
+<div id="printer-new">
   <%= form_with url: printers_path, method: :post do |f| %>
-    <h4> Add a printer </h4>
+    <p> Add a printer </p>
 
-    <%= f.label :printer_brand%>
+    <%= f.label :printer_brand, "Printer Brand:"%>
     <%= f.text_field :printer_brand %>
 
-    <%= f.label :printer_model%>
+    <%= f.label :printer_model, "Printer Model:"%>
     <%= f.text_field :printer_model %>
 
-    <%# create radio buttons for printer types to keep database input neat %>
-    <%= f.label :printer_type %>
-    <% printer_types.each do |p| %>
-      <%= f.radio_button :printer_type, p %>
-      <%= f.label :printer_type, p %>
-    <% end %>
+      <%# create radio buttons for printer types to keep database input neat %>
+      <%= f.label :printer_type, "Printer Type:" %>
+    <div id="printer-type-radio-buttons">
+      <% printer_types.each do |p| %>
+        <%= f.radio_button :printer_type, p %>
+        <%= f.label :printer_type, p %>
+      <% end %>
+    </div>
     <small>*Unfortunately, Print3d Society currently only supports FDM and SLA printers</small>
 
-    <%= f.submit "Add"%>
+    <div id="back-add">
+      <%= link_to "Back", :back, id: "back" %> 
+      <%= f.submit "Add Printer", id: "submit_button" %>
+    </div>
   <% end %>
 </div>
 
